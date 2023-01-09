@@ -23,6 +23,7 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user); // create the form
         $form->handleRequest($request); // handle the request
+        $randomUser = generateRandomUsername();
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
@@ -32,6 +33,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            $user->setPseudo($randomUser);
 
             $entityManager->persist($user); // save the user
             $entityManager->flush(); // flush the entity manager into the database

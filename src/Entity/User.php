@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -28,6 +29,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\Column]
     private ?string $password = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $pseudo = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $biographie = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $temps_visionnage = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $classement = null;
 
     public function getId(): ?int
     {
@@ -97,5 +113,65 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    public function getBiographie(): ?string
+    {
+        return $this->biographie;
+    }
+
+    public function setBiographie(?string $biographie): self
+    {
+        $this->biographie = $biographie;
+
+        return $this;
+    }
+
+    public function getTempsVisionnage(): ?string
+    {
+        return $this->temps_visionnage;
+    }
+
+    public function setTempsVisionnage(?string $temps_visionnage): self
+    {
+        $this->temps_visionnage = $temps_visionnage;
+
+        return $this;
+    }
+
+    public function getClassement(): ?int
+    {
+        return $this->classement;
+    }
+
+    public function setClassement(?int $classement): self
+    {
+        $this->classement = $classement;
+
+        return $this;
     }
 }
