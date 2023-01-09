@@ -29,6 +29,14 @@ class Anime
     #[ORM\Column]
     private ?int $nombre_episodes = null;
 
+    #[ORM\ManyToOne(inversedBy: 'animes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Genre $genre = null;
+
+    #[ORM\ManyToOne(inversedBy: 'animes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Theme $theme = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +98,30 @@ class Anime
     public function setNombreEpisodes(int $nombre_episodes): self
     {
         $this->nombre_episodes = $nombre_episodes;
+
+        return $this;
+    }
+
+    public function getGenre(): ?Genre
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(?Genre $genre): self
+    {
+        $this->genre = $genre;
+
+        return $this;
+    }
+
+    public function getTheme(): ?Theme
+    {
+        return $this->theme;
+    }
+
+    public function setTheme(?Theme $theme): self
+    {
+        $this->theme = $theme;
 
         return $this;
     }
