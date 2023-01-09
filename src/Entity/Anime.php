@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AnimeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -36,6 +38,21 @@ class Anime
     #[ORM\ManyToOne(inversedBy: 'animes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Theme $theme = null;
+
+    #[ORM\ManyToOne(inversedBy: 'animes')]
+    private ?Statut $statut = null;
+
+    #[ORM\ManyToOne(inversedBy: 'animes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Mangaka $mangaka = null;
+
+    #[ORM\OneToMany(mappedBy: 'anime', targetEntity: Avis::class)]
+    private Collection $avis;
+
+    public function __construct()
+    {
+        $this->avis = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -122,6 +139,60 @@ class Anime
     public function setTheme(?Theme $theme): self
     {
         $this->theme = $theme;
+
+        return $this;
+    }
+
+    public function getStatut(): ?Statut
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(?Statut $statut): self
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getMangaka(): ?Mangaka
+    {
+        return $this->mangaka;
+    }
+
+    public function setMangaka(?Mangaka $mangaka): self
+    {
+        $this->mangaka = $mangaka;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Avis>
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): self
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis->add($avi);
+            $avi->setAnime($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): self
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getAnime() === $this) {
+                $avi->setAnime(null);
+            }
+        }
 
         return $this;
     }

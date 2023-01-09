@@ -23,6 +23,9 @@ class Avis
     #[ORM\Column]
     private ?int $note_anime = null;
 
+    #[ORM\ManyToOne(inversedBy: 'avis')]
+    private ?Anime $anime = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,6 +63,18 @@ class Avis
     public function setNoteAnime(int $note_anime): self
     {
         $this->note_anime = $note_anime;
+
+        return $this;
+    }
+
+    public function getAnime(): ?Anime
+    {
+        return $this->anime;
+    }
+
+    public function setAnime(?Anime $anime): self
+    {
+        $this->anime = $anime;
 
         return $this;
     }
