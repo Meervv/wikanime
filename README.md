@@ -18,9 +18,9 @@ Dans le cadre du projet principal de l’année de Bachelor option Fullstack, no
 
 ## Installation
 
-- Assurez-vous d'avoir installé PHP et Composer sur votre ordinateur. Si ce n'est pas déjà fait, vous pouvez télécharger PHP à partir du site web officiel de PHP et installer Composer en suivant les instructions sur le site web officiel de Composer.
+- Assurez-vous d'avoir installé PHP V8.2 et Composer sur votre ordinateur. Si ce n'est pas déjà fait, vous pouvez télécharger PHP à partir du site web officiel de PHP et installer Composer en suivant les instructions sur le site web officiel de Composer.
 - Ouvrez votre terminal et naviguez jusqu'à l'emplacement où vous souhaitez créer votre projet.
-- Exécutez la commande suivante pour cloner le projet Symfony 5:
+- Exécutez la commande suivante pour cloner le projet Symfony 6:
 
 ```bash
 git clone https://github.com/Meervv/wikanime.git
