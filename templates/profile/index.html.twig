@@ -3,8 +3,12 @@
 {% block title %}Hello ProfileController!{% endblock %}
 
 {% block body %}
-<div class="example-wrapper">
-    <h1>PROFIL</h1>
-    <p>Salut {{ user.pseudo }}</p>
+<link rel="stylesheet" href="assets/profil.css">
+
+<div class="presentation">
+    <p>Bienvenue</p>
+    <p><span class="user">{{ user.pseudo }} </span>!</p>
+</div>
+<div class="">
 </div>
 {% endblock %}
