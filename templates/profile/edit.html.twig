@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="assets/edit_profil.css">
+
+{{ form_start(form)}}
+{{ form_row(form.pseudo)}}
+{{ form_row(form.image)}}
+{{ form_row(form.biographie)}}
+<button type="submit" class="btn btn-success">Modifier</button>
+{{ form_end(form)}}
+
+{% endblock %}
