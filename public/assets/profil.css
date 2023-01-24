@@ -9,6 +9,8 @@ p {
     margin: 0 5px;
 }
 
+/* ------------------------------Image de profil-------------------------------- */
+
 .user{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
@@ -19,14 +21,9 @@ p {
     border-radius: 50%;
 }
 
-/* .img-profile {
-    float: right;
-} */
-
 .img-profile {
     position: relative;
     float: right;
-    margin-right: 10px;
 }
 
 .icon-tool-edit {
@@ -51,9 +48,10 @@ p {
     color: red;
 }
 
+/* ----------------------------------BIOGRAPHIE---------------------------------- */
+
 .biographie {
-    position : absolute;
-    margin-left: -50px;
+    position : relative;
     width: 200px;
 }
 
@@ -64,6 +62,12 @@ p {
     font-weight: 600;
 }
 
+/* -----------------------------TEMPS VISIONNAGE---------------------------- */
+.temps-visionnage {
+    position: relative;
+    width: 100%;
+}
+
 .temps-visionnage-text {
     font-weight: 800;
 }
@@ -71,9 +75,9 @@ p {
 /* --------------------------------CLASSEMENT-------------------------------- */
 
 .select-menu {
-    max-width: 330px;
-    margin-top: 50px;
-    /* margin: 50px auto; */
+    position: relative;
+    max-width: 200px;
+    margin-top: 30px;
 }
 
 .select-menu .select-btn {
@@ -92,7 +96,7 @@ p {
 
 .select-menu .options {
     position: absolute;
-    width: 330px;
+    width: 200px;
     overflow-y: auto;
     max-height: 295px;
     padding: 10px;
@@ -110,7 +114,6 @@ p {
 
 .select-menu .options .option {
     display: flex;
-    height: 55px;
     cursor: pointer;
     padding: 0 16px;
     border-radius: 8px;
@@ -119,7 +122,7 @@ p {
 }
 
 .select-menu .options .option:hover {
-    background: #f2f2f2;
+    background: #dfbfbf;
 }
 
 .select-menu .options .option i {
@@ -128,7 +131,7 @@ p {
 }
 
 .select-menu .options .option .option-text {
-    font-size: 18px;
+    font-size: 12px;
     color: #333;
 }
 
@@ -176,4 +179,10 @@ p {
 
 .options li {
     pointer-events: none;
+}
+
+/* ----------------------------ANIME EN COURS--------------------------- */
+
+.anime-en-cours {
+    display: flex;
 }

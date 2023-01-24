@@ -3,13 +3,26 @@
 {% block title %}Mon profil{% endblock %}
 
 {% block body %}
-<link rel="stylesheet" href="assets/edit_profil.css">
 
 {{ form_start(form)}}
-{{ form_row(form.pseudo)}}
-{{ form_row(form.image)}}
-{{ form_row(form.biographie)}}
-<button type="submit" class="btn btn-success">Modifier</button>
+    <h1 style="text-align: center; margin-bottom: 50px;">Modifier mon profil</h1>
+    <div class="container flex-container">
+        <p>Modifier le pseudo : </p>
+        <div class="">{{ form_row(form.pseudo)}}</div>
+    </div>
+    <div class="container flex-container">
+        <p>Modifier l'image (URL) : </p>
+        {{ form_row(form.image)}}
+    </div>
+    <div class="container flex-container">
+        <p>Modifier la biographie : </p>
+        {{ form_row(form.biographie)}}
+    </div>
+    <div class="container flex-container">
+        <button type="submit" class="btn btn-success">Modifier</button>
+    </div>
 {{ form_end(form)}}
+
+<link rel="stylesheet" href="assets/edit_profil.css">
 
 {% endblock %}

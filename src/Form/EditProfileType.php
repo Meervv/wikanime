@@ -7,15 +7,22 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class EditProfileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('pseudo', TextType::class)
-            ->add('image', TextType::class)
-            ->add('biographie', TextType::class)
+            ->add('pseudo', TextType::class, array(
+                'label' => false
+            ))
+            ->add('image', TextType::class, array (
+                'label' => false
+            ))
+            ->add('biographie', TextareaType::class, array(
+                'label' => false
+            ))
         ;
     }
 
