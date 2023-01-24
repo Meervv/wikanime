@@ -1,0 +1,18 @@
+h1 {
+    font-size: 2em;
+    font-weight: 600;
+    color: #000;
+    text-align: center;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.label-form {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #000;
+}

@@ -9,8 +9,15 @@
     <p>Bienvenue</p>
     <p><span class="user">{{ user.pseudo }} </span>!</p>
 </div>
+
+{# -------------------------Image de profil----------------------------- #}
+
 <div class="img-profile">
-    <img src="{{ user.image }}" alt="photo de profil">  {#ici je veux afficher l'image de l'utilisateur #}
+    {% if user.image is null %}
+        <img src="assets/img/default.jpg">
+    {% else %}
+        <img src="{{ user.image }}">
+    {% endif %}
     <div class="icon-tool-edit">
         <a href="/edit-profile">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
@@ -30,24 +37,51 @@
         <p class="biographie-text">{{ user.biographie }}</p>
     </div>
 </div>
+
+{# -------------------------Temps de visionnage-----------------------------  #}
+
 <div class="temps-visionnage">
-    <p>Temps de visionnage : <span class="temps-visionnage-text">{{ user.tempsVisionnage }}h</span></p>
+    {% if user.tempsVisionnage is null %}
+        <p>Temps de visionnage : <span class="temps-visionnage-text">0h</span></p>
+    {% else %}
+        <p>Temps de visionnage : <span class="temps-visionnage-text">{{ tempsVisionnage }}h</span></p>
+    {% endif %}
 </div>
 
-<div class="select-menu active">
+{# -------------------------Classement----------------------------- #}
+
+<div class="select-menu inactive">
     <div class="select-btn">
-        <span class="sBtn-text">Classement</span>
+        <span class="Btn-text">Classement</span>
         <i class="bx bx-chevron-down"></i>
     </div>
 
     <ul class="options">
     {% for user in listUsers %}
-        <li class="option"> 
+        <li class="option">
+        {% if user.tempsVisionnage is null %}
+            <span class="option-text">{{user.pseudo}} : 0h</span> 
+        {% else %}
             <span class="option-text">{{user.pseudo}} : {{user.tempsVisionnage}}h</span> 
+        {% endif %}
         </li>
     {% endfor %}
     </ul>
-    
+</div>
+
+{# -------------------------Anime en cours----------------------------- #}
+<div class="container" style="display: flex;">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+            <div class="card">
+            <img src="assets/img/default.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Nom</h5>
+                <p class="card-text">Synopsis</p>
+                <a href="#" class="btn btn-primary">Voir l'anime</a>
+            </div>
+        </div>  
+    </div>
 </div>
 
 <script src="assets/js/profil.js"></script>
