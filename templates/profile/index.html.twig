@@ -1,20 +1,88 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProfileController!{% endblock %}
+{% block title %}Mon profil{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<link rel="stylesheet" href="assets/profil.css">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="presentation">
+    <p>Bienvenue</p>
+    <p><span class="user">{{ user.pseudo }} </span>!</p>
+</div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/marvi/Documents/workspace/wikanime/wikanime/src/Controller/ProfileController.php'|file_link(0) }}">src/Controller/ProfileController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/marvi/Documents/workspace/wikanime/wikanime/templates/profile/index.html.twig'|file_link(0) }}">templates/profile/index.html.twig</a></code></li>
+{# -------------------------Image de profil----------------------------- #}
+
+<div class="img-profile">
+    {% if user.image is null %}
+        <img src="assets/img/default.jpg">
+    {% else %}
+        <img src="{{ user.image }}">
+    {% endif %}
+    <div class="icon-tool-edit">
+        <a href="/edit-profile">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
+                <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+            </svg>
+        </a>
+    </div>
+    <div class="icon-like">
+        <a href="/favoris">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+            </svg>
+        </a>
+    </div>
+    <div class="biographie">
+        <p class="biographie-text">{{ user.biographie }}</p>
+    </div>
+</div>
+
+{# -------------------------Temps de visionnage-----------------------------  #}
+
+<div class="temps-visionnage">
+    {% if user.tempsVisionnage is null %}
+        <p>Temps de visionnage : <span class="temps-visionnage-text">0h</span></p>
+    {% else %}
+        <p>Temps de visionnage : <span class="temps-visionnage-text">{{ tempsVisionnage }}h</span></p>
+    {% endif %}
+</div>
+
+{# -------------------------Classement----------------------------- #}
+
+<div class="select-menu inactive">
+    <div class="select-btn">
+        <span class="Btn-text">Classement</span>
+        <i class="bx bx-chevron-down"></i>
+    </div>
+
+    <ul class="options">
+    {% for user in listUsers %}
+        <li class="option">
+        {% if user.tempsVisionnage is null %}
+            <span class="option-text">{{user.pseudo}} : 0h</span> 
+        {% else %}
+            <span class="option-text">{{user.pseudo}} : {{user.tempsVisionnage}}h</span> 
+        {% endif %}
+        </li>
+    {% endfor %}
     </ul>
 </div>
+
+{# -------------------------Anime en cours----------------------------- #}
+<div class="container" style="display: flex;">
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6 col-6">
+            <div class="card">
+            <img src="assets/img/default.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Nom</h5>
+                <p class="card-text">Synopsis</p>
+                <a href="#" class="btn btn-primary">Voir l'anime</a>
+            </div>
+        </div>  
+    </div>
+</div>
+
+<script src="assets/js/profil.js"></script>
 {% endblock %}

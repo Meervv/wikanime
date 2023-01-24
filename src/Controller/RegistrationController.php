@@ -15,6 +15,17 @@ use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
 
 class RegistrationController extends AbstractController
 {
+    function generateRandomUsername() {
+        $characters = '0123456789';
+        $usernameLength = 8; //longueur du nom d'utilisateur
+        $randomUsername = ''; //initialise la variable qui contiendra le nom de l'utilisateur générré aléatoirement
+
+        for ($i = 0; $i < $usernameLength; $i++) { //boucle qui génère le nom d'utilisateur
+            $randomUsername .= $characters[rand(0, strlen($characters) - 1)]; //ajoute un caractère aléatoire à la variable $randomUsername
+        }
+        return "user" . $randomUsername;
+    }
+
     #[Route('/inscription', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, 
     UserAuthenticatorInterface $userAuthenticator, UsersAuthenticator $authenticator, 
@@ -23,7 +34,7 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user); // create the form
         $form->handleRequest($request); // handle the request
-        $randomUser = generateRandomUsername();
+        $randomUser = $this->generateRandomUsername();
 
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
