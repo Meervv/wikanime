@@ -3,29 +3,30 @@
 {% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="container" style="display: flex;">
-<div class="row">
+<link rel="stylesheet" href="assets/index.css">
+
+<h1 class="titrePage">Bibliothèque</h1>
+
+
+<div class="lesAnimes">
+
     {% for anime in animes %}
-    <div class="col-lg-3 col-md-6 col-sm-6 col-6">
-    <div class="card">
-        <img src="{{anime.image}}" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">{{anime.nom}}</h5>
-            <p class="card-text">{{anime.synopsis}}</p>
-            <a href="#" class="btn btn-primary">Voir l'anime</a>
-        </div>
+
+        <div class="unAnime">
+
+            <img class="imgCarteAnime" src="{{anime.image}}" alt="Illustration Animé">
+
+            <div class="InfosCarteAnime">
+                <h5 class="titreCarteAnime">{{anime.nom}}</h5>
+                <p class="synopsisCarteAnime">{{anime.synopsis}}</p>
+                <a href="#" class="btnCarteAnime">Voir l'anime</a>
+            </div>
+
         </div>
         
-    </div>
     {% endfor %}
-    </div>
+
 </div>
-    
-    
 
 {% endblock %}

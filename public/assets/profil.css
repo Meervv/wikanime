@@ -185,4 +185,5 @@ p {
 
 .anime-en-cours {
     display: flex;
+    flex-direction: row;
 }
