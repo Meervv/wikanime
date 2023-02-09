@@ -19,7 +19,6 @@ class Statut
     private ?string $libelle = null;
 
     #[ORM\Column]
-    private ?int $estFavoris = null;
 
     #[ORM\OneToMany(mappedBy: 'statut', targetEntity: Anime::class)]
     private Collection $animes;
@@ -42,18 +41,6 @@ class Statut
     public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
-
-        return $this;
-    }
-
-    public function getEstFavoris(): ?int
-    {
-        return $this->estFavoris;
-    }
-
-    public function setEstFavoris(int $estFavoris): self
-    {
-        $this->estFavoris = $estFavoris;
 
         return $this;
     }
