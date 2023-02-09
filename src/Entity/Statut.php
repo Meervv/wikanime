@@ -20,14 +20,6 @@ class Statut
 
     #[ORM\Column]
 
-    #[ORM\OneToMany(mappedBy: 'statut', targetEntity: Anime::class)]
-    private Collection $animes;
-
-    public function __construct()
-    {
-        $this->animes = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -41,36 +33,6 @@ class Statut
     public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Anime>
-     */
-    public function getAnimes(): Collection
-    {
-        return $this->animes;
-    }
-
-    public function addAnime(Anime $anime): self
-    {
-        if (!$this->animes->contains($anime)) {
-            $this->animes->add($anime);
-            $anime->setStatut($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAnime(Anime $anime): self
-    {
-        if ($this->animes->removeElement($anime)) {
-            // set the owning side to null (unless already changed)
-            if ($anime->getStatut() === $this) {
-                $anime->setStatut(null);
-            }
-        }
 
         return $this;
     }
