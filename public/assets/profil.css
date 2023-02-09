@@ -1,83 +1,117 @@
-.presentation {
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+body{
+    background: #F4F1DE;
+}
+
+
+/* ------------------------------ Introduction ------------------------------ */
+
+.presentation{
     display: flex;
     justify-content: center;
+    font-size: larger;
 }
 
-p {
-    font-size: 24px;
-    font-weight: 600;
-    margin: 0 5px;
-}
-
-/* ------------------------------Image de profil-------------------------------- */
-
-.user{
+.presentation p{
+    margin: 2px;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.img-profile img {
-    width: 100px;
-    height: 100px;
+#bvnUser{
+    font-weight: 100;
+}
+
+
+/* ------------------------------Bandeau de profil------------------------------ */
+
+.tmpsVisioClassementImgProfil{
+    display: flex;
+    justify-content: space-between;
+}
+
+.tmpsVisioClassement{
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+}
+
+/* ------------------------------Carte de profil-------------------------------- */
+
+.profilCarte{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-right: 30px;
+    padding: 15px;
+    max-width: 250px;
+    background: #69A2B0;
+    border: 4px ridge #0E103D;
+    border-radius: 20px;
+}
+
+.imgProfil img{
+    width: 150px;
     border-radius: 50%;
 }
 
-.img-profile {
-    position: relative;
-    float: right;
+.bandeauLogos{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
-.icon-tool-edit {
-    position: absolute;
-    top: 0;
-    left: -20px;
-}
-
-.icon-like {
-    position: absolute;
-    top: 70px;
-    left: -20px;
-}
-
-.icon-tool-edit a {
-    text-decoration: none;
-    color: #000;
-}
-
-.icon-like a {
-    text-decoration: none;
+.logoFavoris a{
     color: red;
 }
 
-/* ----------------------------------BIOGRAPHIE---------------------------------- */
-
-.biographie {
-    position : relative;
-    width: 200px;
+.logoModif a{
+    color: black;
 }
 
-.biographie-text {
+
+/* ----------------------------------BIOGRAPHIE---------------------------------- */
+
+.biographie{
     margin-top: 10px;
-    margin-right: 50px;
-    font-size: 12px;
-    font-weight: 600;
+}
+
+.bioTxt{
+    font-weight: 500;
+    text-align: center;
+    text-justify: distribute-all-lines;
 }
 
 /* -----------------------------TEMPS VISIONNAGE---------------------------- */
-.temps-visionnage {
-    position: relative;
-    width: 100%;
+
+.tmpsVisioClassement{
+    background: #69A2B0;
+    border: 4px ridge #0E103D;
+    border-radius: 20px;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.temps-visionnage-text {
-    font-weight: 800;
+.tmpsVisionnage{
+    text-align: center;
+    margin-top: 10px;
 }
+
 
 /* --------------------------------CLASSEMENT-------------------------------- */
 
 .select-menu {
     position: relative;
-    max-width: 200px;
-    margin-top: 30px;
+    width: 225px;
+    margin: 5px;
 }
 
 .select-menu .select-btn {
@@ -91,7 +125,7 @@ p {
     align-items: center;
     cursor: pointer;
     justify-content: space-between;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .select-menu .options {
@@ -117,6 +151,7 @@ p {
     cursor: pointer;
     padding: 0 16px;
     border-radius: 8px;
+    justify-content: center;
     align-items: center;
     background: #fff;
 }
@@ -133,6 +168,7 @@ p {
 .select-menu .options .option .option-text {
     font-size: 12px;
     color: #333;
+    text-align: center;
 }
 
 .select-btn i {
@@ -183,7 +219,74 @@ p {
 
 /* ----------------------------ANIME EN COURS--------------------------- */
 
-.anime-en-cours {
+.bandeauDesAnimsEnCours{
+    background: #0E103D;
+}
+
+.formeBandeau{
+    transform: rotate(180deg);
+}
+
+.formeBandeau svg{
+    height: 48px;
+    width: calc(100% + 1.3px);
+}
+
+.formeBandeau .formeBandeauFill {
+    fill: #F4F1DE;
+}
+
+.lesAnimsEnCours{
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.unAnime{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border: 7px ridge #F4F1DE;
+    width: 250px;
+    max-height: 450px;
+    margin-top: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 15px;
+    background: #69A2B0;
+    border-radius: 10px;
+    transition: 1.5s;
+    box-shadow: 8px 8px 8px 4px rgba(0, 0, 0, 0.5);
+}
+
+.imgCarteAnime{
+    width: 230px;
+    max-height: 230px;
+}
+
+.InfosCarteAnime{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}
+
+.btnCarteAnime{
+    border: 1px solid #000;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    background: #69A2B0;
+    color: #000;
+    text-decoration: none;
+    transition: 1.2s;
+}
+
+.btnCarteAnime:hover{
+    background: #F4F1DE;
+    color: #0E103D;
+    outline: 3px ridge #0E103D;
+    transition: 0.6s;
+    box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.6);
 }
