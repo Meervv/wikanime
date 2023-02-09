@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Entity\Anime;
 use App\Entity\User;
 use App\Form\EditProfileType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,10 +23,17 @@ class ProfileController extends AbstractController
         $repo = $doctrine->getManager()->getRepository(User::class);
         $listUsers = $repo->findAll();
 
+
+        $animes = $doctrine->getRepository(Anime::class)->findAll();
+        forEach($animes as $anime) {
+            $anime->setSynopsis(substr($anime->getSynopsis(), 0, 200) . '...');
+        }
+
         return $this->render('profile/index.html.twig', [
             'controller_name' => 'ProfileController',
             'user' => $user,
-            'listUsers' => $listUsers
+            'listUsers' => $listUsers,
+            'animes' => $animes,
         ]);
     }
 
