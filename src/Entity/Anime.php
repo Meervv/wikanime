@@ -40,9 +40,6 @@ class Anime
     private ?Theme $theme = null;
 
     #[ORM\ManyToOne(inversedBy: 'animes')]
-    private ?Statut $statut = null;
-
-    #[ORM\ManyToOne(inversedBy: 'animes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Mangaka $mangaka = null;
 
@@ -139,18 +136,6 @@ class Anime
     public function setTheme(?Theme $theme): self
     {
         $this->theme = $theme;
-
-        return $this;
-    }
-
-    public function getStatut(): ?Statut
-    {
-        return $this->statut;
-    }
-
-    public function setStatut(?Statut $statut): self
-    {
-        $this->statut = $statut;
 
         return $this;
     }

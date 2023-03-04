@@ -18,7 +18,8 @@ class EditProfileType extends AbstractType
                 'label' => false
             ))
             ->add('image', TextType::class, array (
-                'label' => false
+                'label' => false,
+                'required' => false
             ))
             ->add('biographie', TextareaType::class, array(
                 'label' => false
