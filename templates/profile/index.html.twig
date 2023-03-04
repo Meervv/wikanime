@@ -27,7 +27,7 @@
             {% if user.tempsVisionnage is null %}
                 <p>Temps de visionnage : <span class="tmpsVisioTxt">0h</span></p>
             {% else %}
-                <p>Temps de visionnage : <span class="tmpsVisioTxt">{{ tempsVisionnage }}h</span></p>
+                <p>Temps de visionnage : <span class="tmpsVisioTxt">{{ user.tempsVisionnage }}h</span></p>
             {% endif %}
         </div>
 
@@ -108,7 +108,7 @@
 
     <div class="lesAnimsEnCours">
         {% for anime in animes %}
-            {# {% if anime.statut == 2 %} #}
+            {% if anime.id == 2 %}
 
                 <div class="unAnime">
 
@@ -122,7 +122,7 @@
 
                 </div>
 
-            {# {% endif %} #}
+            {% endif %}
         {% endfor %}
     </div>
 
