@@ -46,9 +46,13 @@ class Anime
     #[ORM\OneToMany(mappedBy: 'anime', targetEntity: Avis::class)]
     private Collection $avis;
 
+    #[ORM\OneToMany(mappedBy: 'anime', targetEntity: Statut::class)]
+    private Collection $statuts;
+
     public function __construct()
     {
         $this->avis = new ArrayCollection();
+        $this->statuts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -176,6 +180,36 @@ class Anime
             // set the owning side to null (unless already changed)
             if ($avi->getAnime() === $this) {
                 $avi->setAnime(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Statut>
+     */
+    public function getStatuts(): Collection
+    {
+        return $this->statuts;
+    }
+
+    public function addStatut(Statut $statut): self
+    {
+        if (!$this->statuts->contains($statut)) {
+            $this->statuts->add($statut);
+            $statut->setAnime($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatut(Statut $statut): self
+    {
+        if ($this->statuts->removeElement($statut)) {
+            // set the owning side to null (unless already changed)
+            if ($statut->getAnime() === $this) {
+                $statut->setAnime(null);
             }
         }
 
