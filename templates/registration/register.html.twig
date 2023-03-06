@@ -1,29 +1,37 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Register{% endblock %}
+{% block nav %}{% endblock %}
+{% block antiBootstrap %}{% endblock %}
+{% block style %}<link rel="stylesheet" href="assets/inscription.css">{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <section class="container">
-        <div class="row">
-            <div class="col">
-                <h1 class="h3 mb-3 font-weight-normal" style="text-align:center;">Inscription</h1><br>
-                   
-
+    <div class="bandeauForm">
+        <div class="decoForm">
+            <img class="narutoInscription" src="assets/img/Inscription/narutoInscription.png">
+        </div>
+        <div class="maForm">
+            <div class="titreForm">
+                <h1>Inscrivez-vous !</h1>
+                <hr class="hrTop">
+            </div>
+            <div class="lesInputs">
                 {{ form_start(registrationForm) }}
-                    {{ form_row(registrationForm.email) }}<br>
-                    {{ form_row(registrationForm.plainPassword, {
-                                label: 'Mot de passe'
-                                })
-                    }} <br>
-                    {{ form_row(registrationForm.RGPDConsent) }}<br>
-                     <div class="row">
-                        <div class="col">
-                            <p>Vous êtes déjà inscrit ? <a href="{{ path('app_login') }}">Connectez-vous</a></p>
-                        </div><br>
-                    </div>
-                    <button class="btn btn-outline-success mt-3" type="submit"></i> S'inscrire</button>
+                    {{ form_row(registrationForm.pseudo) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.plainPassword) }}
+                    {{ form_row(registrationForm.RGPDConsent) }}
+            </div>
+            <div class="lesRedirections">
+                <hr class="hrBottom">
+                <div class="redirectBottom">
+                    <button class="btnInscription" type="submit">Je m'inscris !</button>
+                    <a href="{{ path('app_login') }}">J'ai déjà un compte</a>
+                </div>
                 {{ form_end(registrationForm) }}
             </div>
         </div>
-    </section>
+        <div class="decoForm">
+            <img class="luffyInscription" src="assets/img/Inscription/luffyInscription.png">
+        </div>
+    </div>
 {% endblock %}
