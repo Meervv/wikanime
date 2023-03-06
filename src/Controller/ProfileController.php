@@ -58,7 +58,7 @@ class ProfileController extends AbstractController
     #[Route('/favoris', name: 'app_favoris')]
     public function favoris(ManagerRegistry $doctrine, Request $request, EntityManagerInterface $manager): Response
     {    
-        $user = $this->getUser();
+        // $user = $this->getUser();
         $status = $doctrine->getRepository(Statut::class)->findAll();
         $animes = $doctrine->getRepository(Anime::class)->findAll();
         $test = null;
