@@ -1,11 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+/* :root{
+    --cl1: #f4f1de;
+    --cl2: #ffb116;
+    --cl3: #3f7caf;
+    --cl4: #004792;
+    --cl5: #003051;
+} */
+
 *{
     margin: 0;
     padding: 0;
-    text-decoration: none;
+    font-family: 'Nunito', sans-serif;
 }
 
 body{
-    background: #F4F1DE;
+    background: var(--cl1);
 }
 
 
@@ -58,6 +67,7 @@ body{
 .imgProfil img{
     width: 150px;
     border-radius: 50%;
+    border: 2px solid var(--cl5);
 }
 
 .bandeauLogos{
@@ -73,6 +83,11 @@ body{
 
 .logoModif a{
     color: black;
+}
+
+.hrProfil{
+    width: 80%;
+    border: 1px solid var(--cl5);
 }
 
 
