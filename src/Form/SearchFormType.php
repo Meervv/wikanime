@@ -18,10 +18,18 @@ class SearchFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('q', TextType::class, [
+                'label' => false,
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'Rechercher'
+                ]
+            ])
             ->add('genre', EntityType::class, [
                 'class' => Anime::class,
                 'required' => false,
                 'label' => false,
+                'expanded' => false,
                 'choice_label' => function(Anime $anime) {
                     return $anime->getGenre()->getLibelle();
                 }
@@ -35,6 +43,12 @@ class SearchFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => SearchData::class,
+            'method' => 'GET',
+            'csrf_protection' => false
         ]);
+    }
+
+    public function getBlockPrefix() {
+        return '';
     }
 }

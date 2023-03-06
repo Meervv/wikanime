@@ -2,18 +2,21 @@
 
 namespace App\Data;
 
-use App\Entity\Anime;
 class SearchData {
+    /**
+     * @var string
+     */
     public $nom;
-    public $genre;
-    public $theme;
-    public $mangaka;
 
     /**
-     * @var Anime[]
-    */
-    public $genres = [];
+     * @var string
+     */
+    public $genre;
 
+    /**
+     * @var string
+     */
+    public $theme;
 }
 
 ?>
