@@ -17,7 +17,7 @@ body{
 
             <h5 class="titreCarteAnime"></h5>
             <p class="synopsisCarteAnime"></p>
-            <a href="#" class="btnCarteAnime"></a>
+            <a class="btnCarteAnime"></a>
 
         </div>
 
@@ -88,4 +88,16 @@ body{
 .titrePage{
     text-align: center;
     margin-top: 15px;
+}
+
+.erreurRecherche {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

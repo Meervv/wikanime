@@ -14,8 +14,36 @@
 }
 
 body{
-    background: var(--cl1);
+    background: var(--cl3);
 }
+
+    /* <div class="bandeauForm">
+        <div class="decoForm">
+            <img class="narutoInscription">
+        </img>
+        <div class="maForm">
+            <div class="titreForm">
+                <h1>Inscrivez-vous !</h1>
+                <hr class="hrForm">
+            </div>
+            <div class="lesInputs">
+                {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.pseudo) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.plainPassword) }}
+                    {{ form_row(registrationForm.RGPDConsent) }}
+            </div>
+            <div class="lesRedirections">
+                <hr class="hrForm">
+                <button class="btnInscription" type="submit">S'inscrire</button>
+                <a href="{{ path('app_login') }}">J'ai déjà un compte</a>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+        <div class="decoForm">
+            <img class="luffyInscription">
+        </div>
+    </div> */
 
 .bandeauForm{
     display: flex;
@@ -36,20 +64,21 @@ body{
 }
 
 .luffyInscription{
-    height: 500px;
+    height: 450px;
 }
 
 .maForm{
     flex-basis: 22%;
-    background: var(--cl3);
+    background: var(--cl1);
+    height: 430px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     padding: 15px;
     border-radius: 20px;
-    border-left: 5px solid var(--cl5);
-    border-right: 5px solid var(--cl5);
+    border-left: 6px solid var(--cl5);
+    border-right: 6px solid var(--cl5);
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
@@ -58,7 +87,7 @@ body{
     width: 90%;
     text-align: center;
     margin-top: 10px;
-    color: var(--cl1);
+    color: var(--cl5);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,7 +96,6 @@ body{
 .hrTop{
     width: 80%;
     margin-top: 15px;
-    margin-bottom: 15px;
     border: 1px solid var(--cl4);
 }
 
@@ -87,17 +115,6 @@ body{
 .lesInputs input{
     width: 99%;
     height: 25px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    padding-left: 5px;
-    box-shadow: 6px 3px 3px rgba(0, 0, 0, 0.1);
-}
-
-.lesInputs textarea{
-    max-width: 99%;
-    min-width: 99%;
-    max-height: 80px;
-    min-height: 80px;
     border-radius: 4px;
     margin-bottom: 20px;
     padding-left: 5px;
@@ -125,55 +142,29 @@ body{
 .redirectBottom{
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
-.btnIModifierProfil{
-    width: 35%;
-    height: 40px;
-    border: 1px solid var(--cl1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: medium;
+.btnInscription{
+    padding: 10px 20px 10px 20px;
     border-radius: 10px;
+    border: 2px solid var(--cl5);
     background: var(--cl4);
     color: var(--cl1);
+    font-weight: 700;
     transition: 0.5s;
 }
 
-.btnIModifierProfil:hover{
-    outline-offset: -3px;
-    outline: 4px solid var(--cl5);
-    color: green;
-    background-color: var(--cl1);
+.btnInscription:hover{
+    outline-offset: -2px;
+    outline: 4px solid var(--cl2);
+    color: var(--cl2);
+    background-color: var(--cl3);
     box-shadow: 6px 3px 3px rgba(0, 0, 0, 0.3);
-    font-weight: bold;
     transition: 0.3s;
 }
 
-.retourBtn{
-    width: 35%;
-    height: 40px;
-    border: 1px solid var(--cl1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: medium;
-    text-decoration: none;
-    border-radius: 10px;
-    background: var(--cl4);
-    color: var(--cl1);
-    transition: 0.5s;
-}
-
-.retourBtn:hover{
-    outline-offset: -3px;
-    outline: 4px solid var(--cl5);
-    color: red;
-    background-color: var(--cl1);
-    box-shadow: 6px 3px 3px rgba(0, 0, 0, 0.3);
-    font-weight: bold;
-    transition: 0.3s;
+.redirectBottom a{
+    color: var(--cl5);
 }

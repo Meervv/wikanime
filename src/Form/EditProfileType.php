@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Validator\Constraints\Required;
 
 class EditProfileType extends AbstractType
 {
@@ -15,13 +16,15 @@ class EditProfileType extends AbstractType
     {
         $builder
             ->add('pseudo', TextType::class, array(
-                'label' => false
+                'label' => 'Mon pseudo : '
             ))
             ->add('image', TextType::class, array (
-                'label' => false
+                'label' => 'Lien de mon image de profil : ',
+                'required' => false
             ))
             ->add('biographie', TextareaType::class, array(
-                'label' => false
+                'label' => 'Ma biographie : ',
+                'required' => false
             ))
         ;
     }

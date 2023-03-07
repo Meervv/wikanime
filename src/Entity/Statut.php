@@ -15,18 +15,28 @@ class Statut
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $libelle = null;
-
     #[ORM\Column]
-    private ?int $estFavoris = null;
+    private ?bool $favoris = null;
+
 
     #[ORM\OneToMany(mappedBy: 'statut', targetEntity: Anime::class)]
-    private Collection $animes;
+    private Collection $idAnime;
+
+    #[ORM\ManyToOne(inversedBy: 'statuts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'statuts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?StatutType $statut_type = null;
+
+    #[ORM\ManyToOne(inversedBy: 'statuts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Anime $anime = null;
 
     public function __construct()
     {
-        $this->animes = new ArrayCollection();
+        $this->idAnime = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -34,26 +44,14 @@ class Statut
         return $this->id;
     }
 
-    public function getLibelle(): ?string
+    public function isFavoris(): ?bool
     {
-        return $this->libelle;
+        return $this->favoris;
     }
 
-    public function setLibelle(string $libelle): self
+    public function setFavoris(bool $favoris): self
     {
-        $this->libelle = $libelle;
-
-        return $this;
-    }
-
-    public function getEstFavoris(): ?int
-    {
-        return $this->estFavoris;
-    }
-
-    public function setEstFavoris(int $estFavoris): self
-    {
-        $this->estFavoris = $estFavoris;
+        $this->favoris = $favoris;
 
         return $this;
     }
@@ -61,29 +59,47 @@ class Statut
     /**
      * @return Collection<int, Anime>
      */
-    public function getAnimes(): Collection
+    public function getIdAnime(): Collection
     {
-        return $this->animes;
+        return $this->idAnime;
     }
 
-    public function addAnime(Anime $anime): self
+    /**
+     * @return Collection<int, StatutType>
+     */
+
+    public function getUser(): ?User
     {
-        if (!$this->animes->contains($anime)) {
-            $this->animes->add($anime);
-            $anime->setStatut($this);
-        }
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
 
-    public function removeAnime(Anime $anime): self
+    public function getStatutType(): ?StatutType
     {
-        if ($this->animes->removeElement($anime)) {
-            // set the owning side to null (unless already changed)
-            if ($anime->getStatut() === $this) {
-                $anime->setStatut(null);
-            }
-        }
+        return $this->statut_type;
+    }
+
+    public function setStatutType(?StatutType $statut_type): self
+    {
+        $this->statut_type = $statut_type;
+
+        return $this;
+    }
+
+    public function getAnime(): ?Anime
+    {
+        return $this->anime;
+    }
+
+    public function setAnime(?Anime $anime): self
+    {
+        $this->anime = $anime;
 
         return $this;
     }

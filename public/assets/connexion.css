@@ -17,6 +17,7 @@ body{
     background: var(--cl1);
 }
 
+
 .bandeauForm{
     display: flex;
     justify-content: space-evenly;
@@ -41,15 +42,16 @@ body{
 
 .maForm{
     flex-basis: 22%;
-    background: var(--cl3);
+    background: var(--cl2);
+    height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     padding: 15px;
     border-radius: 20px;
-    border-left: 5px solid var(--cl5);
-    border-right: 5px solid var(--cl5);
+    border-left: 5px solid var(--cl4);
+    border-right: 5px solid var(--cl4);
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
@@ -58,27 +60,27 @@ body{
     width: 90%;
     text-align: center;
     margin-top: 10px;
-    color: var(--cl1);
+    color: var(--cl5);
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-weight: bolder;
 }
 
 .hrTop{
-    width: 80%;
+    width: 90%;
     margin-top: 15px;
-    margin-bottom: 15px;
     border: 1px solid var(--cl4);
 }
 
 .hrBottom{
-    width: 80%;
+    width: 90%;
     margin-bottom: 18px;
     border: 1px solid var(--cl4);
 }
 
 .lesInputs{
-    flex-basis: 60%;
+    flex-basis: 40%;
     /* border: 1px solid red; */
     color: var(--cl5);
     width: 90%;
@@ -93,26 +95,8 @@ body{
     box-shadow: 6px 3px 3px rgba(0, 0, 0, 0.1);
 }
 
-.lesInputs textarea{
-    max-width: 99%;
-    min-width: 99%;
-    max-height: 80px;
-    min-height: 80px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    padding-left: 5px;
-    box-shadow: 6px 3px 3px rgba(0, 0, 0, 0.1);
-}
-
 .lesInputs label{
     font-weight: 600;
-}
-
-.lesInputs .checkBox{
-    margin-bottom: 0px;
-    margin-left: 15px;
-    width: 20px;
-    box-shadow:none;
 }
 
 .lesRedirections{
@@ -122,58 +106,27 @@ body{
     align-items: center;
 }
 
-.redirectBottom{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.lesRedirections a{
+    color: var(--cl5);
+    margin-top: 10px;
 }
 
-.btnIModifierProfil{
-    width: 35%;
-    height: 40px;
-    border: 1px solid var(--cl1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: medium;
+.btnConnexion{
+    padding: 10px 20px 10px 20px;
     border-radius: 10px;
+    border: 2px solid var(--cl5);
     background: var(--cl4);
     color: var(--cl1);
+    font-weight: 700;
     transition: 0.5s;
 }
 
-.btnIModifierProfil:hover{
-    outline-offset: -3px;
-    outline: 4px solid var(--cl5);
-    color: green;
+.btnConnexion:hover{
+    outline-offset: -2px;
+    outline: 4px solid var(--cl3);
+    color: var(--cl4);
     background-color: var(--cl1);
     box-shadow: 6px 3px 3px rgba(0, 0, 0, 0.3);
-    font-weight: bold;
     transition: 0.3s;
 }
 
-.retourBtn{
-    width: 35%;
-    height: 40px;
-    border: 1px solid var(--cl1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: medium;
-    text-decoration: none;
-    border-radius: 10px;
-    background: var(--cl4);
-    color: var(--cl1);
-    transition: 0.5s;
-}
-
-.retourBtn:hover{
-    outline-offset: -3px;
-    outline: 4px solid var(--cl5);
-    color: red;
-    background-color: var(--cl1);
-    box-shadow: 6px 3px 3px rgba(0, 0, 0, 0.3);
-    font-weight: bold;
-    transition: 0.3s;
-}
