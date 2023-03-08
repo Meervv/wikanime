@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Anime;
+use App\Entity\Statut;
 use App\Entity\User;
 use App\Form\EditProfileType;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\SqlFormatter\Token;
 
 class ProfileController extends AbstractController
 {
@@ -39,8 +39,8 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/edit-profile', name: 'app_profile_edit')]
-    public function edit_profile(ManagerRegistry $doctrine, Request $request, EntityManagerInterface $manager): Response
-    {    
+    public function edit_profile(Request $request, EntityManagerInterface $manager): Response
+    {
         $user = $this->getUser();
         $form = $this->createForm(EditProfileType::class, $user);
         $form->handleRequest($request);
@@ -52,6 +52,31 @@ class ProfileController extends AbstractController
         }
         return $this->render('profile/edit.html.twig', [
             'editForm' => $form
+        ]);
+    }
+
+    #[Route('/favoris', name: 'app_favoris')]
+    public function favoris(ManagerRegistry $doctrine, Request $request, EntityManagerInterface $manager): Response
+    {    
+        $user = $this->getUser();
+        $status = $doctrine->getRepository(Statut::class)->findAll();
+        $animes = $doctrine->getRepository(Anime::class)->findAll();
+        $test = null;
+
+        forEach($status as $statut) {
+            forEach($animes as $anime) {
+                if (!$statut->getId() == $anime->getStatut()->getId()) {
+                    $test = $statut->getAnimes();
+                }
+                else {
+                    $test = "NON";
+                }
+            }
+        }
+        return $this->render('profile/favoris.html.twig', [
+            'status' => $status,
+            'animes' => $animes,
+            'test' => $test,
         ]);
     }
 }
