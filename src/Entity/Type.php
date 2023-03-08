@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ThemeRepository;
+use App\Repository\TypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ThemeRepository::class)]
-class Theme
+#[ORM\Entity(repositoryClass: TypeRepository::class)]
+class Type
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,9 +16,9 @@ class Theme
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $libelle = null;
+    private ?string $label = null;
 
-    #[ORM\OneToMany(mappedBy: 'theme', targetEntity: Anime::class)]
+    #[ORM\OneToMany(mappedBy: 'type_id', targetEntity: Anime::class)]
     private Collection $animes;
 
     public function __construct()
@@ -31,14 +31,14 @@ class Theme
         return $this->id;
     }
 
-    public function getLibelle(): ?string
+    public function getLabel(): ?string
     {
-        return $this->libelle;
+        return $this->label;
     }
 
-    public function setLibelle(string $libelle): self
+    public function setLabel(string $label): self
     {
-        $this->libelle = $libelle;
+        $this->label = $label;
 
         return $this;
     }
@@ -55,7 +55,7 @@ class Theme
     {
         if (!$this->animes->contains($anime)) {
             $this->animes->add($anime);
-            $anime->setTheme($this);
+            $anime->setType($this);
         }
 
         return $this;
@@ -65,8 +65,8 @@ class Theme
     {
         if ($this->animes->removeElement($anime)) {
             // set the owning side to null (unless already changed)
-            if ($anime->getTheme() === $this) {
-                $anime->setTheme(null);
+            if ($anime->getType() === $this) {
+                $anime->setType(null);
             }
         }
 

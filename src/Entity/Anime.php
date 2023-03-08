@@ -25,11 +25,11 @@ class Anime
     #[ORM\Column(type: Types::TEXT)]
     private ?string $synopsis = null;
 
-    #[ORM\Column]
-    private ?int $note = null;
+    #[ORM\Column(nullable: true)]
+    private ?float $note = null;
 
     #[ORM\Column]
-    private ?int $nombre_episodes = null;
+    private ?int $nombreEpisodes = null;
 
     #[ORM\ManyToOne(inversedBy: 'animes')]
     #[ORM\JoinColumn(nullable: false)]
@@ -37,22 +37,22 @@ class Anime
 
     #[ORM\ManyToOne(inversedBy: 'animes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Theme $theme = null;
+    private ?Type $type = null;
 
     #[ORM\ManyToOne(inversedBy: 'animes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Mangaka $mangaka = null;
 
-    #[ORM\OneToMany(mappedBy: 'anime', targetEntity: Avis::class)]
-    private Collection $avis;
-
-    #[ORM\OneToMany(mappedBy: 'anime', targetEntity: Statut::class)]
+    #[ORM\OneToMany(mappedBy: 'anime_id', targetEntity: Statut::class, orphanRemoval: true)]
     private Collection $statuts;
+
+    #[ORM\OneToMany(mappedBy: 'anime', targetEntity: Avis::class, orphanRemoval: true)]
+    private Collection $avis;
 
     public function __construct()
     {
-        $this->avis = new ArrayCollection();
         $this->statuts = new ArrayCollection();
+        $this->avis = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -96,12 +96,12 @@ class Anime
         return $this;
     }
 
-    public function getNote(): ?int
+    public function getNote(): ?float
     {
         return $this->note;
     }
 
-    public function setNote(int $note): self
+    public function setNote(?float $note): self
     {
         $this->note = $note;
 
@@ -110,12 +110,12 @@ class Anime
 
     public function getNombreEpisodes(): ?int
     {
-        return $this->nombre_episodes;
+        return $this->nombreEpisodes;
     }
 
-    public function setNombreEpisodes(int $nombre_episodes): self
+    public function setNombreEpisodes(int $nombreEpisodes): self
     {
-        $this->nombre_episodes = $nombre_episodes;
+        $this->nombreEpisodes = $nombreEpisodes;
 
         return $this;
     }
@@ -132,14 +132,14 @@ class Anime
         return $this;
     }
 
-    public function getTheme(): ?Theme
+    public function getType(): ?Type
     {
-        return $this->theme;
+        return $this->type;
     }
 
-    public function setTheme(?Theme $theme): self
+    public function setType(?Type $type): self
     {
-        $this->theme = $theme;
+        $this->type = $type;
 
         return $this;
     }
@@ -152,36 +152,6 @@ class Anime
     public function setMangaka(?Mangaka $mangaka): self
     {
         $this->mangaka = $mangaka;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Avis>
-     */
-    public function getAvis(): Collection
-    {
-        return $this->avis;
-    }
-
-    public function addAvi(Avis $avi): self
-    {
-        if (!$this->avis->contains($avi)) {
-            $this->avis->add($avi);
-            $avi->setAnime($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAvi(Avis $avi): self
-    {
-        if ($this->avis->removeElement($avi)) {
-            // set the owning side to null (unless already changed)
-            if ($avi->getAnime() === $this) {
-                $avi->setAnime(null);
-            }
-        }
 
         return $this;
     }
@@ -210,6 +180,36 @@ class Anime
             // set the owning side to null (unless already changed)
             if ($statut->getAnime() === $this) {
                 $statut->setAnime(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Avis>
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): self
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis->add($avi);
+            $avi->setAnime($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): self
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getAnime() === $this) {
+                $avi->setAnime(null);
             }
         }
 

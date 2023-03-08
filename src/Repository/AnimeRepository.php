@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Data\SearchData;
 use App\Entity\Anime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -39,29 +38,6 @@ class AnimeRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
-    public function findAllGenres(): array
-    {
-        return $this->createQueryBuilder('a')
-            ->select('a.genre')
-            ->distinct()
-            ->getQuery()
-            ->getResult();
-    }
-
-    // public function findSearch(SearchData $search) {
-    //     $query = $this
-    //         ->createQueryBuilder('genre')
-    //         ->select('a', 'genre')
-    //         ->join('genre.a', 'a');
-        
-    //     if (!empty($search->genre)) {
-    //         $query = $query
-    //             ->andWhere('a.genre = :genre')
-    //             ->setParameter('genre', $search->genre);
-    //     }
-    //     return $this;
-    // }
 
 //    /**
 //     * @return Anime[] Returns an array of Anime objects
