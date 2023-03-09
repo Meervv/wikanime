@@ -18,7 +18,7 @@ class StatutType
     #[ORM\Column(length: 255)]
     private ?string $label = null;
 
-    #[ORM\OneToMany(mappedBy: 'statut_type', targetEntity: Statut::class)]
+    #[ORM\OneToMany(mappedBy: 'statutType_id', targetEntity: Statut::class)]
     private Collection $statuts;
 
     public function __construct()

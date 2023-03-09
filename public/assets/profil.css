@@ -238,7 +238,7 @@ body{
     background: #0E103D;
 }
 
-.formeBandeau{
+/* .formeBandeau{
     transform: rotate(180deg);
 }
 
@@ -249,7 +249,7 @@ body{
 
 .formeBandeau .formeBandeauFill {
     fill: #F4F1DE;
-}
+} */
 
 .lesAnimsEnCours{
     display: flex;

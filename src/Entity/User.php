@@ -47,13 +47,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?int $classement = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Statut::class)]
+    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Statut::class, orphanRemoval: true)]
     private Collection $statuts;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Avis::class, orphanRemoval: true)]
+    private Collection $avis;
 
     public function __construct()
     {
         $this->statuts = new ArrayCollection();
+        $this->avis = new ArrayCollection();
     }
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Statut::class)]
+
 
     public function getId(): ?int
     {
@@ -209,6 +216,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($statut->getUser() === $this) {
                 $statut->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Avis>
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): self
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis->add($avi);
+            $avi->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): self
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getUser() === $this) {
+                $avi->setUser(null);
             }
         }
 

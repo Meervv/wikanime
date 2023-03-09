@@ -22,7 +22,7 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %} #}
         {% block nav %}
-        <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        {# <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
             <div class="collapse navbar-collapse nav justify-content-center" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -40,6 +40,17 @@
                         <a class="nav-link" href="deconnexion">Deconnexion</a>
                     </li>
                 </ul>
+            </div>
+        </nav> #}
+        <nav class="laNavigation">
+            <div class="navStart">
+                <div class="liNav">
+                    <i class="fa-solid fa-user"></i>
+                    <span>test</span>
+                </div>
+            </div>
+            <div class="navEnd">
+                <a class="btnDeconnexion">
             </div>
         </nav>
         {% endblock %}

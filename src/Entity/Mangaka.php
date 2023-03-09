@@ -24,7 +24,7 @@ class Mangaka
     #[ORM\Column]
     private ?int $age = null;
 
-    #[ORM\OneToMany(mappedBy: 'mangaka', targetEntity: Anime::class)]
+    #[ORM\OneToMany(mappedBy: 'mangaka_id', targetEntity: Anime::class)]
     private Collection $animes;
 
     public function __construct()
