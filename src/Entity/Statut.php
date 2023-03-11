@@ -26,6 +26,9 @@ class Statut
     #[ORM\JoinColumn(nullable: false)]
     private ?Anime $anime = null;
 
+    #[ORM\Column]
+    private ?int $episodes_vus = null;
+
     public function isIsFavoris(): ?bool
     {
         return $this->isFavoris;
@@ -70,6 +73,18 @@ class Statut
     public function setAnime(?Anime $anime): self
     {
         $this->anime = $anime;
+
+        return $this;
+    }
+
+    public function getEpisodesVus(): ?int
+    {
+        return $this->episodes_vus;
+    }
+
+    public function setEpisodesVus(int $episodes_vus): self
+    {
+        $this->episodes_vus = $episodes_vus;
 
         return $this;
     }
