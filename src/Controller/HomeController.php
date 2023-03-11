@@ -46,4 +46,19 @@ class HomeController extends AbstractController
             'selectedTheme' => $typeId,
         ]);
     }
+
+    /**
+    * @Route("/detail/{id}", name="app_detail")
+    */
+    public function show(int $id, AnimeRepository $animeRepo): Response
+    {
+        $anime = $animeRepo->find($id);
+
+        if (!$anime) {
+            throw $this->createNotFoundException('Anime non trouvé');
+        }
+        return $this->render('detail/index.html.twig', [
+            'anime' => $anime,
+        ]);
+    }
 }
