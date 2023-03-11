@@ -15,7 +15,7 @@
         {% block nav %}
             <div class="laNavigation">
                 <div class="navStart">
-                    <img class="logoWikAnime" src="assets/img/Base/logoWikanime.png">
+                    <img class="logoWikAnime" src="{% block logo %}assets/img/Base/logoWikanime.png{% endblock %}">
                 </div>
                 <div class="navEnd">
                     <a class="unOnglet" href="{{ path('app_home') }}" id="Accueil"><span>Accueil</span></a>
