@@ -7,9 +7,6 @@
 
 {% block body %}
     <form class="bandeauForm" method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
         <div class="decoForm">
             <img class="narutoInscription" src="assets/img/Connexion/narutoConnexion.png">
         </div>
@@ -29,6 +26,9 @@
             </div>
             <div class="lesRedirections">
                 <hr class="hrBottom">
+                {% if error %}
+                    <div class="erreur">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
                 <button class="btnConnexion" type="submit">Je me connecte !</button>
                 <a href="{{ path('app_register') }}">Je n'ai pas encore de compte</a>
             </div>
