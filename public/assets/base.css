@@ -6,6 +6,7 @@
     --cl3: #3f7caf;
     --cl4: #004792;
     --cl5: #003051;
+    --cl6: #0E103D;
 }
 
 *{
@@ -14,11 +15,104 @@
     font-family: 'Nunito', sans-serif;
 }
 
-ul{
-    text-decoration: none;
-}
+
+/* <div class="laNavigation">
+    <div class="navStart">
+        <img class="logoWikAnime" src="assets/img/Base/logoWikanime.png">
+    </div>
+    <div class="navEnd">
+        <a class="unOnglet" href="{{ path('app_home') }}" id="Accueil"><span>Accueil</span></a>
+        <a class="unOnglet" href="{{ path('app_home') }}" id="Contact"><span>Contact</span></a>
+        <a class="unOnglet" href="{{ path('app_profile') }}" id="Profil"><span>Profil</span></a>
+        <a class="unOnglet" href="{{ path('app_logout') }}" id="Deconnexion"><span>Deconnexion</span></a>
+    </div>
+</div> */
+
 
 .laNavigation{
     width: 100%;
-    border: 1px solid red;
+    height: 90px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--cl5);
+}
+
+.navStart{
+    flex-basis: 30%;
+}
+
+.logoWikAnime{
+    max-height: 60px;
+    background: var(--cl1);
+    border-radius: 15px;
+    margin-left: 15px;
+}
+
+.navEnd{
+    flex-basis: 40%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.unOnglet{
+    background: var(--cl1);
+    padding: 10px 15px 10px 15px;
+    margin-right: 30px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 3px solid var(--cl3);
+    transition: 0.4s;
+}
+
+.unOnglet:hover{
+    border: 3px solid var(--cl2);
+    background: var(--cl3);
+    transition: 0.5s;
+    color: var(--cl1);
+}
+
+#Deconnexion{
+    color: var(--cl6);
+}
+
+#Deconnexion:hover{
+    border: 3px solid red;
+    background: var(--cl3);
+    transition: 0.5s;
+    color: var(--cl1);
+}
+
+#Profil{
+    color: var(--cl6);
+}
+
+#Profil:hover{
+    border: 3px solid var(--cl2);
+    background: var(--cl3);
+    transition: 0.5s;
+    color: var(--cl1);
+}
+
+#Contact{
+    color: var(--cl6);
+}
+
+#Contact:hover{
+    border: 3px solid var(--cl2);
+    background: var(--cl3);
+    transition: 0.5s;
+    color: var(--cl1);
+}
+
+#Accueil{
+    color: var(--cl6);
+}
+
+#Accueil:hover{
+    border: 3px solid var(--cl2);
+    background: var(--cl3);
+    transition: 0.5s;
+    color: var(--cl1);
 }
