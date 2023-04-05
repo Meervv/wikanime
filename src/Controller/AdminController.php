@@ -17,9 +17,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class AdminController extends AbstractController
 {
-    /**
-    * @Security("is_granted('ROLE_ADMIN')"
-    */
     #[Route('/admin', name: 'app_admin')]
     public function index(): Response
     {
