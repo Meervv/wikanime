@@ -102,28 +102,46 @@
 
 {# -------------------------Anime en cours----------------------------- #}
 
-<div class="bandeauDesAnimsEnCours">
+<div class="lesAnimes">
 
     <div class="lesAnimsEnCours">
-        {% for anime in animes %}
-            {% if anime.id == 2 %}
-
-                <div class="unAnime">
-
-                    <img class="imgCarteAnime" src="{{anime.image}}" alt="Illustration Animé">
-
-                    <div class="InfosCarteAnime">
-                        <h5 class="titreCarteAnime">{{anime.nom}}</h5>
-                        <p class="synopsisCarteAnime">{{anime.synopsis}}</p>
-                        <a href="#" class="btnCarteAnime">Voir l'anime</a>
+        <h3 class="hEnCours">Vous avez commencé : </h3>
+        <hr class="hrContainer">
+        <div class="containerEnCours">
+            {% for statut in statuts %}
+                {% if statut.user == user and statut.statutType.id == 2 %}
+                    <div class="unAnimeEnCours">
+                        <img class="imgCarteAnime" src="{{statut.anime.image}}" alt="Illustration Animé">
+                        <div class="InfosCarteAnime">
+                            <h5 class="titreCarteAnime">{{statut.anime.nom}}</h5>
+                            <p class="synopsisCarteAnime">{{statut.anime.synopsis}}</p>
+                            <a href="#" class="btnCarteAnime">Voir l'anime</a>
+                        </div>
                     </div>
-
-                </div>
-
-            {% endif %}
-        {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
-
+    <div class="backFinis">
+        <div class="lesAnimsFinis">
+            <h3 class="hFinis">Vous avez finis : </h3>
+            <hr class="hrContainer">
+            <div class="containerFinis">
+                {% for statut in statuts %}
+                    {% if statut.user == user and statut.statutType.id == 1 %}
+                        <div class="unAnime">
+                            <img class="imgCarteAnime" src="{{statut.anime.image}}" alt="Illustration Animé">
+                            <div class="InfosCarteAnime">
+                                <h5 class="titreCarteAnime">{{statut.anime.nom}}</h5>
+                                <p class="synopsisCarteAnime">{{statut.anime.synopsis}}</p>
+                                <a href="#" class="btnCarteAnime">Voir l'anime</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 
 <script src="assets/js/profil.js"></script>

@@ -30,11 +30,14 @@ class ProfileController extends AbstractController
             $anime->setSynopsis(substr($anime->getSynopsis(), 0, 200) . '...');
         }
 
+        $statuts = $doctrine->getRepository(Statut::class)->findAll();
+
         return $this->render('profile/index.html.twig', [
             'controller_name' => 'ProfileController',
             'user' => $user,
             'listUsers' => $listUsers,
             'animes' => $animes,
+            'statuts' => $statuts,
         ]);
     }
 
