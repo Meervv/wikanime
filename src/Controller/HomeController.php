@@ -2,34 +2,63 @@
 
 namespace App\Controller;
 
-use App\Data\SearchData;
-use App\Entity\Anime;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Form\SearchFormType;
 use App\Repository\AnimeRepository;
+use App\Repository\GenreRepository;
+use App\Repository\TypeRepository;
 
 class HomeController extends AbstractController
 {
     #[Route('/accueil', name: 'app_home')]
-    public function index(ManagerRegistry $doctrine, Request $request, AnimeRepository $repository): Response
+    public function index(Request $request, AnimeRepository $animeRepo, GenreRepository $genreRepo, TypeRepository $typeRepo): Response
     {
-        $animes = $doctrine->getRepository(Anime::class)->findAll();
-        
-        // $data = new SearchData();
-        // $form = $this->createForm(SearchFormType::class, $data);
-        // $form->handleRequest($request);
-        // $genres = $repository->findSearch($data);
+        // $animes = $animeRepo->findAll();
+        $genres = $genreRepo->findAll();
+        $types = $typeRepo->findAll();
+
+        $genreId = $request->query->getInt('genre');
+        $typeId = $request->query->getInt('type');
+       
+        if ($genreId != null && $typeId == null) {
+            $animes = $animeRepo->findBy(['genre' => $genreId]);
+        }
+        if ($genreId == null && $typeId != null) {
+            $animes = $animeRepo->findBy(['type' => $typeId]);
+        }
+        if ($genreId != null && $typeId != null) {
+            $animes = $animeRepo->findBy(['genre' => $genreId, 'type' => $typeId]);
+        }
+        if ($genreId == null && $typeId == null) {
+            $animes = $animeRepo->findAll();
+        }
+
         forEach($animes as $anime) {
             $anime->setSynopsis(substr($anime->getSynopsis(), 0, 200) . '...');
         }
         return $this->render('home/index.html.twig', [
             'animes' => $animes,
-            // 'form' => $form->createView(),
-            // 'genres' => $genres
+            'genres' => $genres,
+            'types' => $types,
+            'selectedGenre' => $genreId,
+            'selectedTheme' => $typeId,
+        ]);
+    }
+
+    /**
+    * @Route("/detail/{id}", name="app_detail")
+    */
+    public function show(int $id, AnimeRepository $animeRepo): Response
+    {
+        $anime = $animeRepo->find($id);
+
+        if (!$anime) {
+            throw $this->createNotFoundException('Anime non trouvé');
+        }
+        return $this->render('detail/index.html.twig', [
+            'anime' => $anime,
         ]);
     }
 }

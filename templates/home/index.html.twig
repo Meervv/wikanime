@@ -8,24 +8,42 @@
 
 <h1 class="titrePage">Bibliothèque</h1>
 
+<form action="{{ path('app_home') }}" method="get">
+    <label for="genre">Genre :</label>
+    <select name="genre" id="genre">
+        <option value="">Tous les genres</option>
+        {% for genre in genres %}
+            <option value="{{ genre.id }}" {% if selectedGenre == genre.id %}selected{% endif %}>{{ genre.label }}</option>
+        {% endfor %}
+    </select>
+     <label for="type">Type :</label>
+    <select name="type" id="type">
+        <option value="">Tous les types</option>
+        {% for type in types %}
+            <option value="{{ type.id }}" {% if selectedTheme == type.id %}selected{% endif %}>{{ type.label }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Rechercher</button>
+</form>
+
 <div class="lesAnimes">
+    {% if animes %}
+        {% for anime in animes %}
+            <div class="unAnime">
+                <img class="imgCarteAnime" src="{{anime.image}}">
+                <div class="InfosCarteAnime">
+                    <h5 class="titreCarteAnime">{{anime.nom}}</h5>
+                    <p class="synopsisCarteAnime">{{anime.synopsis}}</p>
+                    <a href={{ path('app_detail', {'id': anime.id})}} class="btnCarteAnime">Voir l'anime</a>
+                    {# <a href="{{ path('app_detail', {'id': anime.id}) }}">Voir détails</a> #}
 
-    {% for anime in animes %}
-
-        <div class="unAnime">
-
-            <img class="imgCarteAnime" src="{{anime.image}}" alt="Illustration Animé">
-
-            <div class="InfosCarteAnime">
-                <h5 class="titreCarteAnime">{{anime.nom}}</h5>
-                <p class="synopsisCarteAnime">{{anime.synopsis}}</p>
-                <a href="#" class="btnCarteAnime">Voir l'anime</a>
+                </div>
             </div>
-
+        {% endfor %}
+    {% else %}
+        <div class="erreurRecherche">
+            <p>Aucun anime ne correspond à votre recherche</p>
         </div>
-        
-    {% endfor %}
-
+    {% endif %}
 </div>
-
 {% endblock %}

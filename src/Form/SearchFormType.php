@@ -18,24 +18,15 @@ class SearchFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('q', TextType::class, [
-                'label' => false,
-                'required' => false,
-                'attr' => [
-                    'placeholder' => 'Rechercher'
-                ]
-            ])
-            ->add('genre', EntityType::class, [
+            ->add('genres', EntityType::class, [
                 'class' => Anime::class,
                 'required' => false,
                 'label' => false,
                 'expanded' => false,
-                'choice_label' => function(Anime $anime) {
-                    return $anime->getGenre()->getLibelle();
-                }
+                // 'choice_label' => function(Anime $anime) {
+                //     return $anime->getGenre()->getLibelle();
+                // }
             ])
-            ->add('theme')
-            ->add('mangaka')
         ;
     }
 

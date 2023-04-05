@@ -2,6 +2,8 @@
 
 namespace App\Data;
 
+use App\Entity\Genre;
+
 class SearchData {
     /**
      * @var string
@@ -9,9 +11,9 @@ class SearchData {
     public $nom;
 
     /**
-     * @var string
+     * @var Genre[]
      */
-    public $genre;
+    public $genres;
 
     /**
      * @var string
