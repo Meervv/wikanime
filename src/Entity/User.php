@@ -53,6 +53,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Avis::class, orphanRemoval: true)]
     private Collection $avis;
 
+    #[ORM\Column]
+    private ?int $totalEpisodesVus = null;
+
     public function __construct()
     {
         $this->statuts = new ArrayCollection();
@@ -248,6 +251,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $avi->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTotalEpisodesVus(): ?int
+    {
+        return $this->totalEpisodesVus;
+    }
+
+    public function setTotalEpisodesVus(int $totalEpisodesVus): self
+    {
+        $this->totalEpisodesVus = $totalEpisodesVus;
 
         return $this;
     }

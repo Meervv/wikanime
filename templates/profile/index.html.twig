@@ -33,26 +33,17 @@
             {% endif %}
         </div>
 
+        <hr class="hrClassement">
+
 
         {# -------------------------Classement------------------------- #}
 
-        <div class="select-menu inactive">
-            <div class="select-btn">
-                <span class="Btn-text">Classement</span>
-                <i class="bx bx-chevron-down"></i>
-            </div>
-
-            <ul class="options">
-            {% for user in listUsers %}
-                <li class="option">
-                {% if user.tempsVisionnage is null %}
-                    <span class="option-text">{{user.pseudo}} : 0h</span> 
-                {% else %}
-                    <span class="option-text">{{user.pseudo}} : {{user.tempsVisionnage}}h</span> 
-                {% endif %}
-                </li>
+        <div class="classement">
+            {% for unUser in listUsers %}
+                <div class="unUserClassement">
+                    <span>{{ unUser.pseudo }} :</span> <span class="totalEp"> {{ unUser.totalEpisodesVus }}</span>
+                </div>
             {% endfor %}
-            </ul>
         </div>
 
     </div>
@@ -110,7 +101,7 @@
         <div class="containerEnCours">
             {% for statut in statuts %}
                 {% if statut.user == user and statut.statutType.id == 2 %}
-                    <div class="unAnimeEnCours">
+                    <div class="unAnime">
                         <img class="imgCarteAnime" src="{{statut.anime.image}}" alt="Illustration Animé">
                         <div class="InfosCarteAnime">
                             <h5 class="titreCarteAnime">{{statut.anime.nom}}</h5>
