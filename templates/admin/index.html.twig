@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="assets/admin.css">
+    {% block nav %}{% endblock %}
+    {% block antiBootstrap %}{% endblock %}
+
+    <a href="/admin/add"><button class="btn btn-primary" id="btnAdd">Ajouter</button></a>
+    <a href="/admin/edit"><button class="btn btn-primary" id="btnAdd">Modifier</button></a>
+    <a href="/admin/suppr"><button class="btn btn-primary" id="btnAdd">Supprimer</button></a>
+
+{% endblock %}

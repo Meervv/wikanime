@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,10 +10,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Anime;
 use App\Entity\Statut;
-use App\Entity\User;
 use App\Form\EditProfileType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ProfileController extends AbstractController
 {
@@ -22,10 +21,13 @@ class ProfileController extends AbstractController
     public function index(ManagerRegistry $doctrine, UserRepository $userRepository): Response
     {
         $user = $this->getUser();
+
+        if ($this->IsGranted("ROLE_ADMIN")) {
+            return $this->redirectToRoute('app_admin');
+        }
         // $repo = $doctrine->getManager()->getRepository(User::class);
         // $listUsers = $repo->findBy(['totalEpisodesVus' => 'desc']);
         $listUsers = $userRepository->findBy([],['totalEpisodesVus' => 'desc']);
-
 
         $animes = $doctrine->getRepository(Anime::class)->findAll();
         forEach($animes as $anime) {
