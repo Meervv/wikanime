@@ -13,16 +13,18 @@ use App\Entity\Anime;
 use App\Entity\Statut;
 use App\Entity\User;
 use App\Form\EditProfileType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ProfileController extends AbstractController
 {
     #[Route('/profil', name: 'app_profile')]
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(ManagerRegistry $doctrine, UserRepository $userRepository): Response
     {
         $user = $this->getUser();
-        $repo = $doctrine->getManager()->getRepository(User::class);
-        $listUsers = $repo->findAll();
+        // $repo = $doctrine->getManager()->getRepository(User::class);
+        // $listUsers = $repo->findBy(['totalEpisodesVus' => 'desc']);
+        $listUsers = $userRepository->findBy([],['totalEpisodesVus' => 'desc']);
 
 
         $animes = $doctrine->getRepository(Anime::class)->findAll();
@@ -62,23 +64,24 @@ class ProfileController extends AbstractController
     public function favoris(ManagerRegistry $doctrine, Request $request, EntityManagerInterface $manager): Response
     {    
         $user = $this->getUser();
-        $status = $doctrine->getRepository(Statut::class)->findAll();
+        $statuts = $doctrine->getRepository(Statut::class)->findAll();
         $animes = $doctrine->getRepository(Anime::class)->findAll();
         $test = null;
 
-        forEach($status as $statut) {
-            forEach($animes as $anime) {
-                if (!$statut->getId() == $anime->getStatut()->getId()) {
-                    $test = $statut->getAnimes();
-                }
-                else {
-                    $test = "NON";
-                }
-            }
-        }
+        // forEach($status as $statut) {
+        //     forEach($animes as $anime) {
+        //         if (!$statut->getId() == $anime->getStatut()->getId()) {
+        //             $test = $statut->getAnimes();
+        //         }
+        //         else {
+        //             $test = "NON";
+        //         }
+        //     }
+        // }
         return $this->render('profile/favoris.html.twig', [
-            'status' => $status,
+            'statuts' => $statuts,
             'animes' => $animes,
+            'user' => $user,
             'test' => $test,
         ]);
     }

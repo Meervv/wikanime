@@ -15,7 +15,7 @@
 }
 
 body{
-    background: var(--cl1);
+    background: var(--cl3);
 }
 
 
@@ -29,7 +29,6 @@ body{
 
 .presentation p{
     margin: 2px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 #bvnUser{
@@ -48,6 +47,7 @@ body{
     display: flex;
     flex-direction: column;
     margin-left: 30px;
+    height: fit-content;
 }
 
 /* ------------------------------Carte de profil-------------------------------- */
@@ -61,8 +61,10 @@ body{
     padding: 15px;
     max-width: 250px;
     max-height: 370px;
-    border: 4px ridge #0E103D;
+    border-left: 4px solid var(--cl6);
+    border-right: 4px solid var(--cl6);
     border-radius: 20px;
+    background: var(--cl1);
 }
 
 .imgProfil img{
@@ -112,129 +114,46 @@ body{
 /* -----------------------------TEMPS VISIONNAGE---------------------------- */
 
 .tmpsVisioClassement{
-    border: 4px ridge #0E103D;
+    border-left: 4px solid var(--cl6);
+    border-right: 4px solid var(--cl6);
     border-radius: 20px;
     width: 250px;
+    max-height: 370px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: var(--cl1);
 }
 
 .tmpsVisionnage{
     text-align: center;
     margin-top: 10px;
+    margin-bottom: -15px;
+    font-weight: bold;
+}
+
+.hrClassement{
+    width: 75%;
+    border: 1px solid var(--cl5);
 }
 
 
 /* --------------------------------CLASSEMENT-------------------------------- */
 
-.select-menu {
-    position: relative;
-    width: 225px;
-    margin: 5px;
+.classement{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding-bottom: 10px;
 }
 
-.select-menu .select-btn {
+.unUserClassement{
     display: flex;
-    height: 55px;
-    background: #fff;
-    padding: 20px;
-    font-size: 18px;
-    font-weight: 400;
-    border-radius: 8px;
-    align-items: center;
-    cursor: pointer;
     justify-content: space-between;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
-.select-menu .options {
-    position: absolute;
-    width: 200px;
-    overflow-y: auto;
-    max-height: 295px;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 8px;
-    background: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    animation-name: fadeInDown;
-    -webkit-animation-name: fadeInDown;
-    animation-duration: 0.35s;
-    animation-fill-mode: both;
-    -webkit-animation-duration: 0.35s;
-    -webkit-animation-fill-mode: both;
-}
-
-.select-menu .options .option {
-    display: flex;
-    cursor: pointer;
-    padding: 0 16px;
-    border-radius: 8px;
-    justify-content: center;
-    align-items: center;
-    background: #fff;
-}
-
-.select-menu .options .option:hover {
-    background: #dfbfbf;
-}
-
-.select-menu .options .option i {
-    font-size: 25px;
-    margin-right: 12px;
-}
-
-.select-menu .options .option .option-text {
-    font-size: 12px;
-    color: #333;
-    text-align: center;
-}
-
-.select-btn i {
-    font-size: 25px;
-    transition: 0.3s;
-}
-  
-.select-menu.active .select-btn i {
-    transform: rotate(-180deg);
-}
-
-.select-menu.active .options {
-    display: block;
-    opacity: 0;
-    z-index: 10;
-    animation-name: fadeInUp;
-    -webkit-animation-name: fadeInUp;
-    animation-duration: 0.4s;
-    animation-fill-mode: both;
-    -webkit-animation-duration: 0.4s;
-    -webkit-animation-fill-mode: both;
-}
-  
-@keyframes fadeInUp {
-    from {
-      transform: translate3d(0, 30px, 0);
-    }
-    to {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
-    }
-}
-
-@keyframes fadeInDown {
-    from {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
-    }
-    to {
-      transform: translate3d(0, 20px, 0);
-      opacity: 0;
-    }
-}
-
-.options li {
-    pointer-events: none;
+.totalEp{
+    font-weight: bold;
 }
 
 /* ----------------------------ANIME EN COURS--------------------------- */
@@ -251,6 +170,7 @@ body{
     margin-bottom: 5px;
     margin-left: 40px;
     color: var(--cl1);
+    font-weight: 700;
 }
 
 .hFinis{
@@ -258,6 +178,7 @@ body{
     margin-bottom: 5px;
     margin-left: 40px;
     color: var(--cl5);
+    font-weight: 700;
 }
 
 .hrContainer{
@@ -278,6 +199,7 @@ body{
     display: flex;
     gap: 40px;
     padding-left: 15px;
+    overflow: scroll;
 }
 
 .backFinis{
@@ -291,12 +213,14 @@ body{
     background: var(--cl3);
     border-radius: 50px 50px 0 0;
     margin-top: 30px;
+    min-height: 300px;
 }
 
 .containerFinis{
     display: flex;
     gap: 40px;
     padding-left: 15px;
+    flex-wrap: wrap;
 }
 
 .unAnime{
@@ -304,26 +228,8 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    border: 7px ridge var(--cl1);
     width: 280px;
-    max-height: 450px;
-    margin-left: 15px;
-    margin-right: 15px;
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 8px 8px 8px 4px rgba(0, 0, 0, 0.3);
-    background: var(--cl4);
-}
-
-.unAnimeEnCours{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: 280px;
-    max-height: 450px;
-    margin-left: 15px;
-    margin-right: 15px;
+    margin: 15px;
     padding: 15px;
     border-radius: 25px;
     box-shadow: 8px 8px 8px 4px rgba(0, 0, 0, 0.3);
@@ -346,19 +252,21 @@ body{
 }
 
 .btnCarteAnime{
-    border: 1px solid #000;
+    border-left: 4px solid var(--cl2);
+    border-right: 4px solid var(--cl2);
     padding: 5px 10px 5px 10px;
     border-radius: 12px;
     background: var(--cl3);
-    color: #000;
+    color: var(--cl1);
     text-decoration: none;
-    transition: 1.2s;
+    transition: 0.4s;
 }
 
 .btnCarteAnime:hover{
-    background: #F4F1DE;
-    color: #0E103D;
-    outline: 3px ridge #0E103D;
-    transition: 0.6s;
-    box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.6);
+    border-left: 4px solid var(--cl6);
+    border-right: 4px solid var(--cl6);
+    background: var(--cl2);
+    color: var(--cl6);
+    transition: 0.5s;
+    box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.3);
 }
