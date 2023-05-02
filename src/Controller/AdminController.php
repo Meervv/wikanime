@@ -5,35 +5,44 @@ namespace App\Controller;
 use App\Entity\Anime;
 use App\Entity\Genre;
 use App\Entity\Type;
-use App\Form\AnimeType;
-use App\Form\GenreType;
-use App\Form\TypeType;
+
+use App\Form\AnimeAddType;
+use App\Form\GenreAddType;
+use App\Form\TypeAddType;
+
+use App\Form\AnimeEditType;
+
+use App\Repository\AnimeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'app_admin')]
-    public function index(): Response
+    public function index(AnimeRepository $animeRepo): Response
     {
+        $animes = $animeRepo->findAll();
+        forEach($animes as $anime) {
+            $anime->setSynopsis(substr($anime->getSynopsis(), 0, 200) . '...');
+        }
         return $this->render('admin/index.html.twig', [
-            'controller_name' => 'AdminController',
+            'animes' => $animes
         ]);
     }
 
     #[Route('/admin/add', name: 'app_admin_add')]
-    public function addAnime(Request $request, EntityManagerInterface $manager) : Response {
+    public function add(Request $request, EntityManagerInterface $manager) : Response {
         $anime = new Anime();
         $genre = new Genre();
         $type = new Type();
         
-        $formAnime = $this->createForm(AnimeType::class, $anime);
-        $formGenre = $this->createForm(GenreType::class, $genre);
-        $formType = $this->createForm(TypeType::class, $type);
+        $formAnime = $this->createForm(AnimeAddType::class, $anime);
+        $formGenre = $this->createForm(GenreAddType::class, $genre);
+        $formType = $this->createForm(TypeAddType::class, $type);
 
         $formAnime->handleRequest($request);
         $formGenre->handleRequest($request);
@@ -60,5 +69,36 @@ class AdminController extends AbstractController
             'formGenre' => $formGenre,
             'formType' => $formType
         ]);
+    }
+    
+    #[Route('/admin/edit/{id}', name: 'app_admin_edit')]
+
+    public function edit(int $id, ManagerRegistry $doctrine, Request $request, EntityManagerInterface $manager) : Response {
+        $anime = $doctrine->getRepository(Anime::class)->find($id);
+        if (!$anime) {
+            throw $this->createNotFoundException('L\'anime n\'existe pas');
+        }
+        $form = $this->createForm(AnimeEditType::class, $anime);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($anime);
+            $manager->flush();
+            return $this->redirectToRoute('app_admin');
+        }
+        return $this->render('admin/edit.html.twig', [
+            'formAnime' => $form
+        ]);
+    }
+
+    #[Route('/admin/delete/{id}', name: 'app_admin_delete')]
+
+    public function delete(int $id, ManagerRegistry $doctrine, EntityManagerInterface $manager) : Response {
+        $anime = $doctrine->getRepository(Anime::class)->find($id);
+        if (!$anime) {
+            throw $this->createNotFoundException('L\'anime n\'existe pas');
+        }
+        $manager->remove($anime);
+        $manager->flush();
+        return $this->redirectToRoute('app_admin');
     }
 }

@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
 
-class AnimeType extends AbstractType
+class AnimeAddType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
