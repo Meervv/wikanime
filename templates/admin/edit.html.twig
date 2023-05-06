@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification{% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="/assets/admin.css">
+    {% block nav %}{% endblock %}
+    {% block antiBootstrap %}{% endblock %}
+
+    <div class="wrapper">
+        {# -----------------------------Ajout Anime---------------------------------- #}
+        <div class="maForm">
+            <div class="titreForm">
+                <h1>Modifier un anime</h1>
+                <hr class="hrTop">
+            </div>
+            <div class="lesInputs">
+                {{ form_start(formAnime) }}
+                    {{ form_row(formAnime.nom) }}
+                    {{ form_row(formAnime.image) }}
+                    {{ form_row(formAnime.synopsis) }}
+                    {{ form_row(formAnime.note) }}
+                    {{ form_row(formAnime.nombreEpisodes) }}
+
+                    {# mangaka #}
+                    {{ form_label(formAnime.mangaka) }}
+                    {{ form_widget(formAnime.mangaka) }}
+                    </br>
+
+                    {# genre #}
+                    {{ form_label(formAnime.genre) }}
+                    {{ form_widget(formAnime.genre) }}
+                    </br>
+                    
+                    {# type #}
+                    {{ form_label(formAnime.type) }}
+                    {{ form_widget(formAnime.type) }}
+                    </br>
+                    <button class="btnIModifierProfil" type="submit">Valider</button>
+                {{ form_end(formAnime) }}
+            </div>
+        </div>
+        {# -----------------------------Ajout Genre---------------------------------- #}
+        {# <div class="maForm">
+            <div class="titreForm">
+                <h1>Ajouter un genre</h1>
+                <hr class="hrTop">
+            </div>
+            <div class="lesInputs">
+                {{ form_start(formGenre) }}
+                    {{ form_row(formGenre.label) }}
+                    <button class="btnIModifierProfil" type="submit">Valider</button>
+                {{ form_end(formGenre) }}
+            </div>
+        </div> #}
+        {# -----------------------------Ajout Type---------------------------------- #}
+        {# <div class="maForm">
+            <div class="titreForm">
+                <h1>Ajouter un type</h1>
+                <hr class="hrTop">
+            </div>
+            <div class="lesInputs">
+                {{ form_start(formType) }}
+                    {{ form_row(formType.label) }}
+                    <button class="btnIModifierProfil" type="submit">Valider</button>
+                {{ form_end(formType) }}
+            </div>
+        </div> #}
+    </div>
+{% endblock %}

@@ -15,7 +15,6 @@ class HomeController extends AbstractController
     #[Route('/accueil', name: 'app_home')]
     public function index(Request $request, AnimeRepository $animeRepo, GenreRepository $genreRepo, TypeRepository $typeRepo): Response
     {
-        // $animes = $animeRepo->findAll();
         $genres = $genreRepo->findAll();
         $types = $typeRepo->findAll();
 

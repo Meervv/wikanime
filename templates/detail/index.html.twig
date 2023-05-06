@@ -3,6 +3,7 @@
 {% block style %}
 <link rel="stylesheet" href="/assets/base.css">
 <link rel="stylesheet" href="/assets/detail.css">
+
 {% endblock %}
 
 {% block title %}Détail{% endblock %}
@@ -13,8 +14,21 @@
 {% block logo %}/assets/img/Base/logoWikanime.png{% endblock %}
 ?>
 
-{{ anime.nom }}
+<div class="container">
+    {# grid 2 colonnes 1fr 2fr #}
+    <div class="grid">
+        <div class="colonne1">
+            <img src="{{ anime.image }}" alt="image de l'anime" class="image">
+            <h1>{{ anime.nom }}</h1>
+            <p>{{ anime.note }} / 5</p>
+        </div>
+        <div class="colonne2">
+            <input type="checkbox" checked="checked" id="favorite" name="favorite-checkbox" value="favorite-button">
+            <label for="favorite" class="container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            </label>
+        </div>
+    </div>
+</div>
 
-
-<h1>OKOKOK</h1>
 {% endblock %}
