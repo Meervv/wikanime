@@ -49,6 +49,9 @@ class Anime
     #[ORM\OneToMany(mappedBy: 'anime', targetEntity: Avis::class, orphanRemoval: true)]
     private Collection $avis;
 
+    #[ORM\Column(length: 255)]
+    private ?string $imageDetails = null;
+
     public function __construct()
     {
         $this->statuts = new ArrayCollection();
@@ -212,6 +215,18 @@ class Anime
                 $avi->setAnime(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImageDetails(): ?string
+    {
+        return $this->imageDetails;
+    }
+
+    public function setImageDetails(string $imageDetails): self
+    {
+        $this->imageDetails = $imageDetails;
 
         return $this;
     }
