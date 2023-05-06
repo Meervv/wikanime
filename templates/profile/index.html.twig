@@ -39,10 +39,16 @@
         {# -------------------------Classement------------------------- #}
 
         <div class="classement">
-            {% for unUser in listUsers %}
-                <div class="unUserClassement">
-                    <span>{{ unUser.pseudo }} :</span> <span class="totalEp"> {{ unUser.totalEpisodesVus }}</span>
-                </div>
+            {% for i in 0..10 %}
+                {% if listUsers|length > i %}
+                    <div class="unUserClassement">
+                        <span>{{ listUsers[i].pseudo }} :</span> <span class="totalEp"> {{ listUsers[i].totalEpisodesVus }}</span>
+                    </div>
+                {% else %}
+                    <div class="unUserClassement">
+                        <span>---------</span> <span class="totalEp"> - </span>
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
 
@@ -106,7 +112,8 @@
                         <div class="InfosCarteAnime">
                             <h5 class="titreCarteAnime">{{statut.anime.nom}}</h5>
                             <p class="synopsisCarteAnime">{{statut.anime.synopsis}}</p>
-                            <a href="#" class="btnCarteAnime">Voir l'anime</a>
+                            <a href={{ path('app_detail', {'id': statut.anime.id})}} class="btnCarteAnime">Voir l'anime</a>
+                            {# <a href="#" class="btnCarteAnime">Voir l'anime</a> #}
                         </div>
                     </div>
                 {% endif %}
@@ -125,7 +132,8 @@
                             <div class="InfosCarteAnime">
                                 <h5 class="titreCarteAnime">{{statut.anime.nom}}</h5>
                                 <p class="synopsisCarteAnime">{{statut.anime.synopsis}}</p>
-                                <a href="#" class="btnCarteAnime">Voir l'anime</a>
+                                <a href={{ path('app_detail', {'id': statut.anime.id})}} class="btnCarteAnime">Voir l'anime</a>
+                                {# <a href="#" class="btnCarteAnime">Voir l'anime</a> #}
                             </div>
                         </div>
                     {% endif %}

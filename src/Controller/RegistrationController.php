@@ -34,12 +34,12 @@ class RegistrationController extends AbstractController
             );
             $pseudo = $form->get('pseudo')->getData();
             $user->setPseudo($pseudo);
-            
+
             $user->setTotalEpisodesVus(0);
 
             $entityManager->persist($user); // save the user
             $entityManager->flush(); // flush the entity manager into the database
-           
+
             // do anything else you need here, like send an email
 
             return $userAuthenticator->authenticateUser(

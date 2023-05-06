@@ -14,6 +14,7 @@ use App\Entity\Statut;
 use App\Entity\User;
 use App\Form\EditProfileType;
 use App\Repository\UserRepository;
+use App\Repository\AnimeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class ProfileController extends AbstractController
@@ -25,7 +26,6 @@ class ProfileController extends AbstractController
         // $repo = $doctrine->getManager()->getRepository(User::class);
         // $listUsers = $repo->findBy(['totalEpisodesVus' => 'desc']);
         $listUsers = $userRepository->findBy([],['totalEpisodesVus' => 'desc']);
-
 
         $animes = $doctrine->getRepository(Anime::class)->findAll();
         forEach($animes as $anime) {
@@ -83,6 +83,25 @@ class ProfileController extends AbstractController
             'animes' => $animes,
             'user' => $user,
             'test' => $test,
+        ]);
+    }
+
+    /**
+    * @Route("/detail/{id}", name="app_detail")
+    */
+    public function show(int $id, AnimeRepository $animeRepo): Response
+    {
+        $anime = $animeRepo->find($id);
+
+        // $jeu = $jeuRepo->find($nomJeu);
+        // $idJeu = $jeu->getID();
+        // $this->setid($idJeu);
+
+        if (!$anime) {
+            throw $this->createNotFoundException('Anime non trouvé');
+        }
+        return $this->render('detail/index.html.twig', [
+            'anime' => $anime,
         ]);
     }
 }
