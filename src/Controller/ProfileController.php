@@ -12,6 +12,7 @@ use App\Entity\Anime;
 use App\Entity\Statut;
 use App\Form\EditProfileType;
 use App\Repository\UserRepository;
+use App\Repository\AnimeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -85,6 +86,25 @@ class ProfileController extends AbstractController
             'animes' => $animes,
             'user' => $user,
             'test' => $test,
+        ]);
+    }
+
+    /**
+    * @Route("/detail/{id}", name="app_detail")
+    */
+    public function show(int $id, AnimeRepository $animeRepo): Response
+    {
+        $anime = $animeRepo->find($id);
+
+        // $jeu = $jeuRepo->find($nomJeu);
+        // $idJeu = $jeu->getID();
+        // $this->setid($idJeu);
+
+        if (!$anime) {
+            throw $this->createNotFoundException('Anime non trouvé');
+        }
+        return $this->render('detail/index.html.twig', [
+            'anime' => $anime,
         ]);
     }
 }
