@@ -32,7 +32,7 @@ label {
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 10px 15px 10px 10px;
+    width: 10%;
     cursor: pointer;
     user-select: none;
     border-radius: 10px;
