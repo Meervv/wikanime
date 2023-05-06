@@ -3,70 +3,55 @@
 namespace App\Entity;
 
 use App\Repository\StatutRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StatutRepository::class)]
 class Statut
 {
+
+    #[ORM\Column]
+    private ?bool $isFavoris = null;
+
+    #[ORM\ManyToOne(inversedBy: 'statuts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?StatutType $statutType = null;
+
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
-    #[ORM\Column]
-    private ?bool $favoris = null;
-
-
-    #[ORM\OneToMany(mappedBy: 'statut', targetEntity: Anime::class)]
-    private Collection $idAnime;
-
     #[ORM\ManyToOne(inversedBy: 'statuts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'statuts')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?StatutType $statut_type = null;
-
+    #[ORM\Id]
     #[ORM\ManyToOne(inversedBy: 'statuts')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Anime $anime = null;
 
-    public function __construct()
+    #[ORM\Column]
+    private ?int $episodes_vus = null;
+
+    public function isIsFavoris(): ?bool
     {
-        $this->idAnime = new ArrayCollection();
+        return $this->isFavoris;
     }
 
-    public function getId(): ?int
+    public function setIsFavoris(bool $isFavoris): self
     {
-        return $this->id;
-    }
-
-    public function isFavoris(): ?bool
-    {
-        return $this->favoris;
-    }
-
-    public function setFavoris(bool $favoris): self
-    {
-        $this->favoris = $favoris;
+        $this->isFavoris = $isFavoris;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Anime>
-     */
-    public function getIdAnime(): Collection
+    public function getStatutType(): ?StatutType
     {
-        return $this->idAnime;
+        return $this->statutType;
     }
 
-    /**
-     * @return Collection<int, StatutType>
-     */
+    public function setStatutType(?StatutType $statutType): self
+    {
+        $this->statutType = $statutType;
+
+        return $this;
+    }
 
     public function getUser(): ?User
     {
@@ -80,18 +65,6 @@ class Statut
         return $this;
     }
 
-    public function getStatutType(): ?StatutType
-    {
-        return $this->statut_type;
-    }
-
-    public function setStatutType(?StatutType $statut_type): self
-    {
-        $this->statut_type = $statut_type;
-
-        return $this;
-    }
-
     public function getAnime(): ?Anime
     {
         return $this->anime;
@@ -100,6 +73,18 @@ class Statut
     public function setAnime(?Anime $anime): self
     {
         $this->anime = $anime;
+
+        return $this;
+    }
+
+    public function getEpisodesVus(): ?int
+    {
+        return $this->episodes_vus;
+    }
+
+    public function setEpisodesVus(int $episodes_vus): self
+    {
+        $this->episodes_vus = $episodes_vus;
 
         return $this;
     }

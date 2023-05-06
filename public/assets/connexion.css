@@ -5,6 +5,7 @@
     --cl3: #3f7caf;
     --cl4: #004792;
     --cl5: #003051;
+    --cl6: #0E103D;
 } */
 
 *{
@@ -80,7 +81,7 @@ body{
 }
 
 .lesInputs{
-    flex-basis: 40%;
+    flex-basis: 35%;
     /* border: 1px solid red; */
     color: var(--cl5);
     width: 90%;
@@ -109,6 +110,15 @@ body{
 .lesRedirections a{
     color: var(--cl5);
     margin-top: 10px;
+}
+
+.erreur{
+    margin-bottom: 10px;
+    color: red;
+    background: var(--cl1);
+    border-radius: 10px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .btnConnexion{

@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
-/* :root{
+:root{
     --cl1: #f4f1de;
     --cl2: #ffb116;
     --cl3: #3f7caf;
     --cl4: #004792;
     --cl5: #003051;
     --cl6: #0E103D;
-} */
+}
 
 *{
     margin: 0;
@@ -15,29 +15,15 @@
 }
 
 body{
-    background: var(--cl1);
+    background: var(--cl3);
 }
 
-.bandeauForm{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top: 50px;
-}
-
-.decoForm{
-    flex-basis: 25%;
+.wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.narutoInscription{
-    height: 600px;
-}
-
-.luffyInscription{
-    height: 500px;
+    width: 100%;
+    background: var(--cl3);
 }
 
 .maForm{
@@ -48,7 +34,7 @@ body{
     justify-content: space-between;
     align-items: center;
     padding: 15px;
-    border-radius: 20px;
+    border-radius: 10px;
     border-left: 5px solid var(--cl5);
     border-right: 5px solid var(--cl5);
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.3);
@@ -72,12 +58,6 @@ body{
     border: 1px solid var(--cl4);
 }
 
-.hrBottom{
-    width: 80%;
-    margin-bottom: 18px;
-    border: 1px solid var(--cl4);
-}
-
 .lesInputs{
     flex-basis: 60%;
     /* border: 1px solid red; */
@@ -86,10 +66,10 @@ body{
 }
 
 .lesInputs input{
-    width: 99%;
+    width: 100%;
     height: 25px;
     border-radius: 4px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding-left: 5px;
     box-shadow: 6px 3px 3px rgba(0, 0, 0, 0.1);
 }
@@ -109,24 +89,10 @@ body{
     font-weight: 600;
 }
 
-.lesInputs .checkBox{
-    margin-bottom: 0px;
-    margin-left: 15px;
-    width: 20px;
-    box-shadow:none;
-}
-
 .lesRedirections{
     width: 90%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-}
-
-.redirectBottom{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
@@ -148,31 +114,6 @@ body{
     outline-offset: -3px;
     outline: 4px solid var(--cl5);
     color: green;
-    background-color: var(--cl1);
-    box-shadow: 6px 3px 3px rgba(0, 0, 0, 0.3);
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.retourBtn{
-    width: 35%;
-    height: 40px;
-    border: 1px solid var(--cl1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: medium;
-    text-decoration: none;
-    border-radius: 10px;
-    background: var(--cl4);
-    color: var(--cl1);
-    transition: 0.5s;
-}
-
-.retourBtn:hover{
-    outline-offset: -3px;
-    outline: 4px solid var(--cl5);
-    color: red;
     background-color: var(--cl1);
     box-shadow: 6px 3px 3px rgba(0, 0, 0, 0.3);
     font-weight: bold;

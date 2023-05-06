@@ -13,14 +13,14 @@
     <select name="genre" id="genre">
         <option value="">Tous les genres</option>
         {% for genre in genres %}
-            <option value="{{ genre.id }}" {% if selectedGenre == genre.id %}selected{% endif %}>{{ genre.libelle }}</option>
+            <option value="{{ genre.id }}" {% if selectedGenre == genre.id %}selected{% endif %}>{{ genre.label }}</option>
         {% endfor %}
     </select>
-     <label for="genre">Thème :</label>
-    <select name="theme" id="theme">
-        <option value="">Tous les thèmes</option>
-        {% for theme in themes %}
-            <option value="{{ theme.id }}" {% if selectedTheme == theme.id %}selected{% endif %}>{{ theme.libelle }}</option>
+     <label for="type">Type :</label>
+    <select name="type" id="type">
+        <option value="">Tous les types</option>
+        {% for type in types %}
+            <option value="{{ type.id }}" {% if selectedTheme == type.id %}selected{% endif %}>{{ type.label }}</option>
         {% endfor %}
     </select>
     <button type="submit">Rechercher</button>
@@ -34,7 +34,9 @@
                 <div class="InfosCarteAnime">
                     <h5 class="titreCarteAnime">{{anime.nom}}</h5>
                     <p class="synopsisCarteAnime">{{anime.synopsis}}</p>
-                    <a href="#" class="btnCarteAnime">Voir l'anime</a>
+                    <a href={{ path('app_detail', {'id': anime.id})}} class="btnCarteAnime">Voir l'anime</a>
+                    {# <a href="{{ path('app_detail', {'id': anime.id}) }}">Voir détails</a> #}
+
                 </div>
             </div>
         {% endfor %}

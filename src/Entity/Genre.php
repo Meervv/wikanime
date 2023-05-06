@@ -16,9 +16,9 @@ class Genre
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $libelle = null;
+    private ?string $label = null;
 
-    #[ORM\OneToMany(mappedBy: 'genre', targetEntity: Anime::class)]
+    #[ORM\OneToMany(mappedBy: 'genre_id', targetEntity: Anime::class)]
     private Collection $animes;
 
     public function __construct()
@@ -31,14 +31,14 @@ class Genre
         return $this->id;
     }
 
-    public function getLibelle(): ?string
+    public function getLabel(): ?string
     {
-        return $this->libelle;
+        return $this->label;
     }
 
-    public function setLibelle(string $libelle): self
+    public function setLabel(string $label): self
     {
-        $this->libelle = $libelle;
+        $this->label = $label;
 
         return $this;
     }

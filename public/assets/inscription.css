@@ -5,6 +5,7 @@
     --cl3: #3f7caf;
     --cl4: #004792;
     --cl5: #003051;
+    --cl6: #0E103D;
 } */
 
 *{
@@ -70,7 +71,7 @@ body{
 .maForm{
     flex-basis: 22%;
     background: var(--cl1);
-    height: 430px;
+    min-height: 430px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -96,6 +97,7 @@ body{
 .hrTop{
     width: 80%;
     margin-top: 15px;
+    margin-bottom: 10px;
     border: 1px solid var(--cl4);
 }
 
