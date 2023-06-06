@@ -11,8 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Anime;
 use App\Entity\Statut;
 use App\Form\EditProfileType;
+use App\Form\ModifStatutFormType;
 use App\Repository\UserRepository;
 use App\Repository\AnimeRepository;
+use App\Repository\StatutRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -92,19 +94,28 @@ class ProfileController extends AbstractController
     /**
     * @Route("/detail/{id}", name="app_detail")
     */
-    public function show(int $id, AnimeRepository $animeRepo): Response
+    public function show(int $id, StatutRepository $statutRepository, AnimeRepository $animeRepo, Request $request, EntityManagerInterface $manager): Response
     {
         $anime = $animeRepo->find($id);
-
-        // $jeu = $jeuRepo->find($nomJeu);
-        // $idJeu = $jeu->getID();
-        // $this->setid($idJeu);
+        $user = $this->getUser();
+        $statut = $statutRepository->findOneBy(['user' => $user, 'anime' => $anime]);
 
         if (!$anime) {
             throw $this->createNotFoundException('Anime non trouvé');
         }
+
+        $form = $this->createForm(ModifStatutFormType::class, $statut);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->persist($statut);
+            $manager->flush();
+            return $this->redirectToRoute('app_detail', ['id' => $id]);
+        }
+
         return $this->render('detail/index.html.twig', [
             'anime' => $anime,
+            'modifStatutForm' => $form,
         ]);
     }
 }

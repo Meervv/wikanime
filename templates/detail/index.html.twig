@@ -37,7 +37,25 @@
 
 
     <div class="part2">
-        
+        <div class="maForm">
+            <div class="titreForm">
+                <h3>Mes informations :</h3>
+                <hr class="hrTop">
+            </div>
+            <div class="lesInputs">
+                {{ form_start(modifStatutForm) }}
+                    {{ form_row(modifStatutForm.isFavoris) }}
+                    {{ form_row(modifStatutForm.episodes_vus) }}
+                    {{ form_row(modifStatutForm.statutType) }}
+            </div>
+            <div class="lesRedirections">
+                <hr class="hrBottom">
+                <div class="redirectBottom">
+                    <button class="btnIModifierStatut" type="submit">Enregistrer</button>
+                </div>
+                {{ form_end(modifStatutForm) }}
+            </div>
+        </div>
     </div>
 
 </div>
