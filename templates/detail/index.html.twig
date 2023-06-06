@@ -3,7 +3,6 @@
 {% block style %}
 <link rel="stylesheet" href="/assets/base.css">
 <link rel="stylesheet" href="/assets/detail.css">
-
 {% endblock %}
 
 {% block title %}Détail{% endblock %}
@@ -14,21 +13,52 @@
 {% block logo %}/assets/img/Base/logoWikanime.png{% endblock %}
 ?>
 
-<div class="container">
-    {# grid 2 colonnes 1fr 2fr #}
-    <div class="grid">
-        <div class="colonne1">
-            <img src="{{ anime.image }}" alt="image de l'anime" class="image">
-            <h1>{{ anime.nom }}</h1>
-            <p>{{ anime.note }} / 5</p>
-        </div>
-        <div class="colonne2">
-            <input type="checkbox" checked="checked" id="favorite" name="favorite-checkbox" value="favorite-button">
-            <label for="favorite" class="container">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-            </label>
+<div class="bandeau">
+
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img class="image" src="{{ anime.imageDetails }}">
+                <h1 class="titre">{{ anime.nom }}</h1>
+            </div>
+            <div class="flip-card-back">
+                <div class="top">
+                    <h1>{{ anime.nom }}</h1>
+                    <h4>{{ anime.mangaka.nom }} {{ anime.mangaka.prenom }}</h4>
+                </div>
+                {{ anime.synopsis }}
+                <div class="infosSupp">
+                    <span>{{ anime.nombreEpisodes }} épisodes</span>
+                    <span>{{ anime.note }} / 5<span>
+                </div>
+            </div>
         </div>
     </div>
+
+
+    <div class="part2">
+        <div class="maForm">
+            <div class="titreForm">
+                <h3>Mes informations :</h3>
+                <hr class="hrTop">
+            </div>
+            <div class="lesInputs">
+                {{ form_start(modifStatutForm) }}
+                    {{ form_row(modifStatutForm.isFavoris) }}
+                    {{ form_row(modifStatutForm.episodes_vus) }}
+                    {{ form_row(modifStatutForm.statutType) }}
+            </div>
+            <div class="lesRedirections">
+                <hr class="hrBottom">
+                <div class="redirectBottom">
+                    <button class="btnIModifierStatut" type="submit">Enregistrer</button>
+                </div>
+                {{ form_end(modifStatutForm) }}
+            </div>
+        </div>
+    </div>
+
 </div>
+
 
 {% endblock %}
