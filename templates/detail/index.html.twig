@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block style %}
+<link rel="stylesheet" href="/assets/base.css">
+<link rel="stylesheet" href="/assets/detail.css">
+{% endblock %}
+
+{% block title %}Détail{% endblock %}
+
+{% block body %}
+
+<?php
+{% block logo %}/assets/img/Base/logoWikanime.png{% endblock %}
+?>
+
+<div class="bandeau">
+
+    <div class="flip-card">
+        <div class="flip-card-inner">
+            <div class="flip-card-front">
+                <img class="image" src="{{ anime.imageDetails }}">
+                <h1 class="titre">{{ anime.nom }}</h1>
+            </div>
+            <div class="flip-card-back">
+                <div class="top">
+                    <h1>{{ anime.nom }}</h1>
+                    <h4>{{ anime.mangaka.nom }} {{ anime.mangaka.prenom }}</h4>
+                </div>
+                {{ anime.synopsis }}
+                <div class="infosSupp">
+                    <span>{{ anime.nombreEpisodes }} épisodes</span>
+                    <span>{{ anime.note }} / 5<span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="part2">
+        <div class="maForm">
+            <div class="titreForm">
+                <h3>Mes informations :</h3>
+                <hr class="hrTop">
+            </div>
+            <div class="lesInputs">
+                {{ form_start(modifStatutForm) }}
+                    {{ form_row(modifStatutForm.isFavoris) }}
+                    {{ form_row(modifStatutForm.episodes_vus) }}
+                    {{ form_row(modifStatutForm.statutType) }}
+            </div>
+            <div class="lesRedirections">
+                <hr class="hrBottom">
+                <div class="redirectBottom">
+                    <button class="btnIModifierStatut" type="submit">Enregistrer</button>
+                </div>
+                {{ form_end(modifStatutForm) }}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

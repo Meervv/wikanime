@@ -1,189 +1,272 @@
-.presentation {
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+/* :root{
+    --cl1: #f4f1de;
+    --cl2: #ffb116;
+    --cl3: #3f7caf;
+    --cl4: #004792;
+    --cl5: #003051;
+    --cl6: #0E103D;
+} */
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+}
+
+body{
+    background: var(--cl3);
+}
+
+
+/* ------------------------------ Introduction ------------------------------ */
+
+.presentation{
     display: flex;
     justify-content: center;
+    font-size: larger;
 }
 
-p {
-    font-size: 24px;
-    font-weight: 600;
-    margin: 0 5px;
+.presentation p{
+    margin: 2px;
 }
 
-/* ------------------------------Image de profil-------------------------------- */
-
-.user{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+#bvnUser{
+    font-weight: 100;
 }
 
-.img-profile img {
-    width: 100px;
-    height: 100px;
+
+/* ------------------------------Bandeau de profil------------------------------ */
+
+.tmpsVisioClassementImgProfil{
+    display: flex;
+    justify-content: space-between;
+}
+
+.tmpsVisioClassement{
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    height: fit-content;
+}
+
+/* ------------------------------Carte de profil-------------------------------- */
+
+.profilCarte{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-right: 30px;
+    padding: 15px;
+    max-width: 250px;
+    max-height: 370px;
+    border-left: 4px solid var(--cl6);
+    border-right: 4px solid var(--cl6);
+    border-radius: 20px;
+    background: var(--cl1);
+}
+
+.imgProfil img{
+    width: 150px;
     border-radius: 50%;
+    border: 2px solid var(--cl5);
 }
 
-.img-profile {
-    position: relative;
-    float: right;
+.bandeauLogos{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
-.icon-tool-edit {
-    position: absolute;
-    top: 0;
-    left: -20px;
-}
-
-.icon-like {
-    position: absolute;
-    top: 70px;
-    left: -20px;
-}
-
-.icon-tool-edit a {
-    text-decoration: none;
-    color: #000;
-}
-
-.icon-like a {
-    text-decoration: none;
+.logoFavoris a{
     color: red;
 }
 
-/* ----------------------------------BIOGRAPHIE---------------------------------- */
-
-.biographie {
-    position : relative;
-    width: 200px;
+.logoModif a{
+    color: black;
 }
 
-.biographie-text {
+.hrProfil{
+    width: 80%;
+    border: 1px solid var(--cl5);
+}
+
+
+/* ----------------------------------BIOGRAPHIE---------------------------------- */
+
+.biographie{
     margin-top: 10px;
-    margin-right: 50px;
-    font-size: 12px;
-    font-weight: 600;
+    overflow: scroll;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.bioTxt{
+    font-weight: 500;
+    text-align: center;
+    text-justify: distribute-all-lines;
 }
 
 /* -----------------------------TEMPS VISIONNAGE---------------------------- */
-.temps-visionnage {
-    position: relative;
-    width: 100%;
+
+.tmpsVisioClassement{
+    border-left: 4px solid var(--cl6);
+    border-right: 4px solid var(--cl6);
+    border-radius: 20px;
+    width: 250px;
+    max-height: 370px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--cl1);
 }
 
-.temps-visionnage-text {
-    font-weight: 800;
+.tmpsVisionnage{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: -15px;
+    font-weight: bold;
 }
+
+.hrClassement{
+    width: 75%;
+    border: 1px solid var(--cl5);
+}
+
 
 /* --------------------------------CLASSEMENT-------------------------------- */
 
-.select-menu {
-    position: relative;
-    max-width: 200px;
-    margin-top: 30px;
+.classement{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding-bottom: 10px;
 }
 
-.select-menu .select-btn {
+.unUserClassement{
     display: flex;
-    height: 55px;
-    background: #fff;
-    padding: 20px;
-    font-size: 18px;
-    font-weight: 400;
-    border-radius: 8px;
-    align-items: center;
-    cursor: pointer;
     justify-content: space-between;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.select-menu .options {
-    position: absolute;
-    width: 200px;
-    overflow-y: auto;
-    max-height: 295px;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 8px;
-    background: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    animation-name: fadeInDown;
-    -webkit-animation-name: fadeInDown;
-    animation-duration: 0.35s;
-    animation-fill-mode: both;
-    -webkit-animation-duration: 0.35s;
-    -webkit-animation-fill-mode: both;
-}
-
-.select-menu .options .option {
-    display: flex;
-    cursor: pointer;
-    padding: 0 16px;
-    border-radius: 8px;
-    align-items: center;
-    background: #fff;
-}
-
-.select-menu .options .option:hover {
-    background: #dfbfbf;
-}
-
-.select-menu .options .option i {
-    font-size: 25px;
-    margin-right: 12px;
-}
-
-.select-menu .options .option .option-text {
-    font-size: 12px;
-    color: #333;
-}
-
-.select-btn i {
-    font-size: 25px;
-    transition: 0.3s;
-}
-  
-.select-menu.active .select-btn i {
-    transform: rotate(-180deg);
-}
-
-.select-menu.active .options {
-    display: block;
-    opacity: 0;
-    z-index: 10;
-    animation-name: fadeInUp;
-    -webkit-animation-name: fadeInUp;
-    animation-duration: 0.4s;
-    animation-fill-mode: both;
-    -webkit-animation-duration: 0.4s;
-    -webkit-animation-fill-mode: both;
-}
-  
-@keyframes fadeInUp {
-    from {
-      transform: translate3d(0, 30px, 0);
-    }
-    to {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
-    }
-}
-
-@keyframes fadeInDown {
-    from {
-      transform: translate3d(0, 0, 0);
-      opacity: 1;
-    }
-    to {
-      transform: translate3d(0, 20px, 0);
-      opacity: 0;
-    }
-}
-
-.options li {
-    pointer-events: none;
+.totalEp{
+    font-weight: bold;
 }
 
 /* ----------------------------ANIME EN COURS--------------------------- */
 
-.anime-en-cours {
+.lesAnimes{
+    margin-top: 20px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    width: 100%;
+}
+
+.hEnCours{
+    margin: 25px;
+    margin-bottom: 5px;
+    margin-left: 40px;
+    color: var(--cl1);
+    font-weight: 700;
+}
+
+.hFinis{
+    margin: 25px;
+    margin-bottom: 5px;
+    margin-left: 40px;
+    color: var(--cl5);
+    font-weight: 700;
+}
+
+.hrContainer{
+    width: 40%;
+    border: 2px solid var(--cl2);
+    opacity: 1;
+}
+
+.lesAnimsEnCours{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: var(--cl4);
+    border-radius: 50px 50px 0 0;
+}
+
+.containerEnCours{
+    display: flex;
+    gap: 40px;
+    padding-left: 15px;
+    overflow: scroll;
+}
+
+.backFinis{
+    background: var(--cl4);
+}
+
+.lesAnimsFinis{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: var(--cl3);
+    border-radius: 50px 50px 0 0;
+    margin-top: 30px;
+    min-height: 300px;
+}
+
+.containerFinis{
+    display: flex;
+    gap: 40px;
+    padding-left: 15px;
+    flex-wrap: wrap;
+}
+
+.unAnime{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 280px;
+    margin: 15px;
+    padding: 15px;
+    border-radius: 25px;
+    box-shadow: 8px 8px 8px 4px rgba(0, 0, 0, 0.3);
+    background: var(--cl1);
+    border-left: 4px solid var(--cl2);
+    border-right: 4px solid var(--cl2);
+}
+
+.imgCarteAnime{
+    width: 230px;
+    max-height: 230px;
+}
+
+.InfosCarteAnime{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 10px;
+}
+
+.btnCarteAnime{
+    border-left: 4px solid var(--cl2);
+    border-right: 4px solid var(--cl2);
+    padding: 5px 10px 5px 10px;
+    border-radius: 12px;
+    background: var(--cl3);
+    color: var(--cl1);
+    text-decoration: none;
+    transition: 0.4s;
+}
+
+.btnCarteAnime:hover{
+    border-left: 4px solid var(--cl6);
+    border-right: 4px solid var(--cl6);
+    background: var(--cl2);
+    color: var(--cl6);
+    transition: 0.5s;
+    box-shadow: 5px 5px 5px 2px rgba(0, 0, 0, 0.3);
 }

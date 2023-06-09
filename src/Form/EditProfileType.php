@@ -15,13 +15,15 @@ class EditProfileType extends AbstractType
     {
         $builder
             ->add('pseudo', TextType::class, array(
-                'label' => false
+                'label' => 'Mon pseudo : '
             ))
             ->add('image', TextType::class, array (
-                'label' => false
+                'label' => 'Lien de mon image de profil : ',
+                'required' => false
             ))
             ->add('biographie', TextareaType::class, array(
-                'label' => false
+                'label' => 'Ma biographie : ',
+                'required' => false
             ))
         ;
     }

@@ -25,11 +25,11 @@ class Anime
     #[ORM\Column(type: Types::TEXT)]
     private ?string $synopsis = null;
 
-    #[ORM\Column]
-    private ?int $note = null;
+    #[ORM\Column(nullable: true)]
+    private ?float $note = null;
 
     #[ORM\Column]
-    private ?int $nombre_episodes = null;
+    private ?int $nombreEpisodes = null;
 
     #[ORM\ManyToOne(inversedBy: 'animes')]
     #[ORM\JoinColumn(nullable: false)]
@@ -37,20 +37,24 @@ class Anime
 
     #[ORM\ManyToOne(inversedBy: 'animes')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Theme $theme = null;
-
-    #[ORM\ManyToOne(inversedBy: 'animes')]
-    private ?Statut $statut = null;
+    private ?Type $type = null;
 
     #[ORM\ManyToOne(inversedBy: 'animes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Mangaka $mangaka = null;
 
-    #[ORM\OneToMany(mappedBy: 'anime', targetEntity: Avis::class)]
+    #[ORM\OneToMany(mappedBy: 'anime_id', targetEntity: Statut::class, orphanRemoval: true)]
+    private Collection $statuts;
+
+    #[ORM\OneToMany(mappedBy: 'anime', targetEntity: Avis::class, orphanRemoval: true)]
     private Collection $avis;
+
+    #[ORM\Column(length: 255)]
+    private ?string $imageDetails = null;
 
     public function __construct()
     {
+        $this->statuts = new ArrayCollection();
         $this->avis = new ArrayCollection();
     }
 
@@ -95,12 +99,12 @@ class Anime
         return $this;
     }
 
-    public function getNote(): ?int
+    public function getNote(): ?float
     {
         return $this->note;
     }
 
-    public function setNote(int $note): self
+    public function setNote(?float $note): self
     {
         $this->note = $note;
 
@@ -109,12 +113,12 @@ class Anime
 
     public function getNombreEpisodes(): ?int
     {
-        return $this->nombre_episodes;
+        return $this->nombreEpisodes;
     }
 
-    public function setNombreEpisodes(int $nombre_episodes): self
+    public function setNombreEpisodes(int $nombreEpisodes): self
     {
-        $this->nombre_episodes = $nombre_episodes;
+        $this->nombreEpisodes = $nombreEpisodes;
 
         return $this;
     }
@@ -131,26 +135,14 @@ class Anime
         return $this;
     }
 
-    public function getTheme(): ?Theme
+    public function getType(): ?Type
     {
-        return $this->theme;
+        return $this->type;
     }
 
-    public function setTheme(?Theme $theme): self
+    public function setType(?Type $type): self
     {
-        $this->theme = $theme;
-
-        return $this;
-    }
-
-    public function getStatut(): ?Statut
-    {
-        return $this->statut;
-    }
-
-    public function setStatut(?Statut $statut): self
-    {
-        $this->statut = $statut;
+        $this->type = $type;
 
         return $this;
     }
@@ -163,6 +155,36 @@ class Anime
     public function setMangaka(?Mangaka $mangaka): self
     {
         $this->mangaka = $mangaka;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Statut>
+     */
+    public function getStatuts(): Collection
+    {
+        return $this->statuts;
+    }
+
+    public function addStatut(Statut $statut): self
+    {
+        if (!$this->statuts->contains($statut)) {
+            $this->statuts->add($statut);
+            $statut->setAnime($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatut(Statut $statut): self
+    {
+        if ($this->statuts->removeElement($statut)) {
+            // set the owning side to null (unless already changed)
+            if ($statut->getAnime() === $this) {
+                $statut->setAnime(null);
+            }
+        }
 
         return $this;
     }
@@ -193,6 +215,18 @@ class Anime
                 $avi->setAnime(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImageDetails(): ?string
+    {
+        return $this->imageDetails;
+    }
+
+    public function setImageDetails(string $imageDetails): self
+    {
+        $this->imageDetails = $imageDetails;
 
         return $this;
     }

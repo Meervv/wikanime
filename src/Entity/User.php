@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -45,6 +47,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?int $classement = null;
 
+    #[ORM\OneToMany(mappedBy: 'user_id', targetEntity: Statut::class, orphanRemoval: true)]
+    private Collection $statuts;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Avis::class, orphanRemoval: true)]
+    private Collection $avis;
+
+    #[ORM\Column]
+    private ?int $totalEpisodesVus = null;
+
+    public function __construct()
+    {
+        $this->statuts = new ArrayCollection();
+        $this->avis = new ArrayCollection();
+    }
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Statut::class)]
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -80,6 +100,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
+
+        // Ajouter le rôle d'administrateur
+        if (in_array('ROLE_ADMIN', $roles, true)) {
+            $roles[] = 'ROLE_ADMIN';
+        }
 
         return array_unique($roles);
     }
@@ -171,6 +196,78 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setClassement(?int $classement): self
     {
         $this->classement = $classement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Statut>
+     */
+    public function getStatuts(): Collection
+    {
+        return $this->statuts;
+    }
+
+    public function addStatut(Statut $statut): self
+    {
+        if (!$this->statuts->contains($statut)) {
+            $this->statuts->add($statut);
+            $statut->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatut(Statut $statut): self
+    {
+        if ($this->statuts->removeElement($statut)) {
+            // set the owning side to null (unless already changed)
+            if ($statut->getUser() === $this) {
+                $statut->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Avis>
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): self
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis->add($avi);
+            $avi->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): self
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getUser() === $this) {
+                $avi->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getTotalEpisodesVus(): ?int
+    {
+        return $this->totalEpisodesVus;
+    }
+
+    public function setTotalEpisodesVus(int $totalEpisodesVus): self
+    {
+        $this->totalEpisodesVus = $totalEpisodesVus;
 
         return $this;
     }

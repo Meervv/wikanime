@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon profil{% endblock %}
+
+{% block body %}
+
+    {% for unStatut in statuts %}
+
+        {% if unStatut.user == user %}
+            {{ unStatut.anime.nom }}
+            <br>
+            <br>
+        {% endif %}
+
+    {% endfor %}
+
+{% endblock %}

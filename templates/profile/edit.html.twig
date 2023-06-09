@@ -1,28 +1,42 @@
 {% extends 'base.html.twig' %}
 
+{% block nav %}{% endblock %}
+
+{% block antiBootstrap %}{% endblock %}
+
+{% block style %}<link rel="stylesheet" href="assets/edit_profil.css">{% endblock %}
+
 {% block title %}Mon profil{% endblock %}
 
 {% block body %}
 
-{{ form_start(form)}}
-    <h1 style="text-align: center; margin-bottom: 50px;">Modifier mon profil</h1>
-    <div class="container flex-container">
-        <p>Modifier le pseudo : </p>
-        <div class="">{{ form_row(form.pseudo)}}</div>
+    <div class="bandeauForm">
+        <div class="decoForm">
+            <img class="narutoInscription" src="assets/img/Profil/narutoModif.png">
+        </div>
+        <div class="maForm">
+            <div class="titreForm">
+                <h1>Mettre à jour mes informations</h1>
+                <hr class="hrTop">
+            </div>
+            <div class="lesInputs">
+                {{ form_start(editForm) }}
+                    {{ form_row(editForm.pseudo) }}
+                    {{ form_row(editForm.image) }}
+                    {{ form_row(editForm.biographie) }}
+            </div>
+            <div class="lesRedirections">
+                <hr class="hrBottom">
+                <div class="redirectBottom">
+                    <button class="btnIModifierProfil" type="submit">Valider</button>
+                    <a class="retourBtn" href="{{ path('app_profile') }}">Annuler</a>
+                </div>
+                {{ form_end(editForm) }}
+            </div>
+        </div>
+        <div class="decoForm">
+            <img class="luffyInscription" src="assets/img/Profil/luffyModif.png">
+        </div>
     </div>
-    <div class="container flex-container">
-        <p>Modifier l'image (URL) : </p>
-        {{ form_row(form.image)}}
-    </div>
-    <div class="container flex-container">
-        <p>Modifier la biographie : </p>
-        {{ form_row(form.biographie)}}
-    </div>
-    <div class="container flex-container">
-        <button type="submit" class="btn btn-success">Modifier</button>
-    </div>
-{{ form_end(form)}}
-
-<link rel="stylesheet" href="assets/edit_profil.css">
 
 {% endblock %}

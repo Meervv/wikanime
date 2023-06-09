@@ -1,46 +1,40 @@
 {% extends 'base.html.twig' %}
+{% block nav %}{% endblock %}
+{% block antiBootstrap %}{% endblock %}
+{% block style %}<link rel="stylesheet" href="assets/connexion.css">{% endblock %}
 
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-
-<section class="containe my-3">
-    <div class="row">
-        <div class="col">
-            <form method="post">
-                {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
-
-                {% if app.user %}
-                    <div class="mb-3">
-                        Vous êtes connecté(e) en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Deconnexion</a>
-                    </div>
-                {% endif %}
-
-                <h1 class="h3 mb-3 font-weight-normal" style="text-align:center;">Me connecter</h1><br><br>
-                <div class="container"> 
-                    <label for="inputEmail">Email</label>
-                    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-                    <br>
-                    <label for="inputPassword">Mot de passe</label>
-                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-                    <br><br>
-                    <input type="hidden" name="_csrf_token"
-                        value="{{ csrf_token('authenticate') }}">
-                <div class="row">
-                        <div class="col">
-                            <p>Vous n'avez pas de compte ? <a href="{{ path('app_register') }}">Inscrivez-vous</a></p>
-                        </div>
-                    </div>
-                <div style="text-align:center;">
-                    <button class="btn btn-outline-success mt-3" type="submit">
-                        Connexion
-                    </button>
-                </div>
-                </div>
-            </form>
+    <form class="bandeauForm" method="post">
+        <div class="decoForm">
+            <img class="narutoInscription" src="assets/img/Connexion/narutoConnexion.png">
         </div>
-    </div>
-</section>
+        <div class="maForm">
+            <div class="titreForm">
+                <h1>Heureux de vous revoir !</h1>
+                <hr class="hrTop">
+            </div>
+            <div class="lesInputs">
+                <label for="inputEmail">Email :</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="" placeholder="Ex: jean.dupond@gmail.com" autocomplete="email" required autofocus>
+                
+                <label for="inputPassword">Mot de passe :</label>
+                <input type="password" name="password" id="inputPassword" class="" placeholder="- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -" autocomplete="current-password" required>
+                    
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+            </div>
+            <div class="lesRedirections">
+                <hr class="hrBottom">
+                {% if error %}
+                    <div class="erreur">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+                <button class="btnConnexion" type="submit">Je me connecte !</button>
+                <a href="{{ path('app_register') }}">Je n'ai pas encore de compte</a>
+            </div>
+        </div>
+        <div class="decoForm">
+            <img class="luffyInscription" src="assets/img/Connexion/luffyConnexion.png">
+        </div>
+    </form>
 {% endblock %}

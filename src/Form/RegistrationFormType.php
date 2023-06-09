@@ -6,6 +6,7 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,19 +21,29 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'attr' => [
-                    'placeholder' => 'Jean.Dumez@gmail.com',
-                    'class' => 'form-control'
+                    'placeholder' => 'Ex: jean.dupond@gmail.com',
+                    'class' => ''
                 ],
-                'label' => 'E-mail'
+                'label' => 'E-mail :'
             ])
             ->add('RGPDConsent', CheckboxType::class, [
                 'mapped' => false,
+                'attr' => [
+                    'class' => 'checkBox'
+                ],
                 'constraints' => [
                     new IsTrue([
                         'message' => 'Vous devez accepter nos termes.',
                     ]),
                 ],
-                'label' => 'J\'accepte les termes et conditions ',
+                'label' => 'J\'accepte les termes et conditions : ',
+            ])
+            ->add('pseudo', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Ex: jeannotLapin',
+                    'class' => ''
+                ],
+                'label' => 'Pseudo :'
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -40,12 +51,12 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'attr' => [
                     'autocomplete' => 'new-password',
-                    'placeholder' => 'Mot de passe',
-                    'class' => 'form-control'
+                    'placeholder' => '- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -',
+                    'class' => ''
                 ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Entrez un mot de passe',
+                        'message' => 'Veuillez entrer un mot de passe',
                     ]),
                     new Length([
                         'min' => 8,
@@ -54,7 +65,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
-                'label' => 'Mot de passe',
+                'label' => 'Mot de passe :',
             ])
         ;
     }

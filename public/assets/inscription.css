@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+/* :root{
+    --cl1: #f4f1de;
+    --cl2: #ffb116;
+    --cl3: #3f7caf;
+    --cl4: #004792;
+    --cl5: #003051;
+    --cl6: #0E103D;
+} */
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+}
+
+body{
+    background: var(--cl3);
+}
+
+    /* <div class="bandeauForm">
+        <div class="decoForm">
+            <img class="narutoInscription">
+        </img>
+        <div class="maForm">
+            <div class="titreForm">
+                <h1>Inscrivez-vous !</h1>
+                <hr class="hrForm">
+            </div>
+            <div class="lesInputs">
+                {{ form_start(registrationForm) }}
+                    {{ form_row(registrationForm.pseudo) }}
+                    {{ form_row(registrationForm.email) }}
+                    {{ form_row(registrationForm.plainPassword) }}
+                    {{ form_row(registrationForm.RGPDConsent) }}
+            </div>
+            <div class="lesRedirections">
+                <hr class="hrForm">
+                <button class="btnInscription" type="submit">S'inscrire</button>
+                <a href="{{ path('app_login') }}">J'ai déjà un compte</a>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+        <div class="decoForm">
+            <img class="luffyInscription">
+        </div>
+    </div> */
+
+.bandeauForm{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.decoForm{
+    flex-basis: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.narutoInscription{
+    height: 600px;
+}
+
+.luffyInscription{
+    height: 450px;
+}
+
+.maForm{
+    flex-basis: 22%;
+    background: var(--cl1);
+    min-height: 430px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-radius: 20px;
+    border-left: 6px solid var(--cl5);
+    border-right: 6px solid var(--cl5);
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.titreForm{
+    /* border: 1px solid red; */
+    width: 90%;
+    text-align: center;
+    margin-top: 10px;
+    color: var(--cl5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hrTop{
+    width: 80%;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border: 1px solid var(--cl4);
+}
+
+.hrBottom{
+    width: 80%;
+    margin-bottom: 18px;
+    border: 1px solid var(--cl4);
+}
+
+.lesInputs{
+    flex-basis: 60%;
+    /* border: 1px solid red; */
+    color: var(--cl5);
+    width: 90%;
+}
+
+.lesInputs input{
+    width: 99%;
+    height: 25px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    padding-left: 5px;
+    box-shadow: 6px 3px 3px rgba(0, 0, 0, 0.1);
+}
+
+.lesInputs label{
+    font-weight: 600;
+}
+
+.lesInputs .checkBox{
+    margin-bottom: 0px;
+    margin-left: 15px;
+    width: 20px;
+    box-shadow:none;
+}
+
+.lesRedirections{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.redirectBottom{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.btnInscription{
+    padding: 10px 20px 10px 20px;
+    border-radius: 10px;
+    border: 2px solid var(--cl5);
+    background: var(--cl4);
+    color: var(--cl1);
+    font-weight: 700;
+    transition: 0.5s;
+}
+
+.btnInscription:hover{
+    outline-offset: -2px;
+    outline: 4px solid var(--cl2);
+    color: var(--cl2);
+    background-color: var(--cl3);
+    box-shadow: 6px 3px 3px rgba(0, 0, 0, 0.3);
+    transition: 0.3s;
+}
+
+.redirectBottom a{
+    color: var(--cl5);
+}

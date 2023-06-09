@@ -10,59 +10,33 @@ use Doctrine\ORM\Mapping as ORM;
 class Avis
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $date = null;
-
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $commentaire = null;
-
-    #[ORM\Column]
-    private ?int $note_anime = null;
-
     #[ORM\ManyToOne(inversedBy: 'avis')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    #[ORM\Id]
+    #[ORM\ManyToOne(inversedBy: 'avis')]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Anime $anime = null;
 
-    public function getId(): ?int
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $date = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $commentaire = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $note = null;
+
+
+    public function getUser(): ?User
     {
-        return $this->id;
+        return $this->user;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function setUser(?User $user): self
     {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    public function getCommentaire(): ?string
-    {
-        return $this->commentaire;
-    }
-
-    public function setCommentaire(?string $commentaire): self
-    {
-        $this->commentaire = $commentaire;
-
-        return $this;
-    }
-
-    public function getNoteAnime(): ?int
-    {
-        return $this->note_anime;
-    }
-
-    public function setNoteAnime(int $note_anime): self
-    {
-        $this->note_anime = $note_anime;
+        $this->user = $user;
 
         return $this;
     }
@@ -75,6 +49,42 @@ class Avis
     public function setAnime(?Anime $anime): self
     {
         $this->anime = $anime;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(?\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getCommentaire(): ?string
+    {
+        return $this->commentaire;
+    }
+
+    public function setCommentaire(string $commentaire): self
+    {
+        $this->commentaire = $commentaire;
+
+        return $this;
+    }
+
+    public function getNote(): ?float
+    {
+        return $this->note;
+    }
+
+    public function setNote(?float $note): self
+    {
+        $this->note = $note;
 
         return $this;
     }

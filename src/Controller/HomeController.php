@@ -2,23 +2,62 @@
 
 namespace App\Controller;
 
-use App\Entity\Anime;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\AnimeRepository;
+use App\Repository\GenreRepository;
+use App\Repository\TypeRepository;
 
 class HomeController extends AbstractController
 {
     #[Route('/accueil', name: 'app_home')]
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(Request $request, AnimeRepository $animeRepo, GenreRepository $genreRepo, TypeRepository $typeRepo): Response
     {
-        $animes = $doctrine->getRepository(Anime::class)->findAll();
+        $genres = $genreRepo->findAll();
+        $types = $typeRepo->findAll();
+
+        $genreId = $request->query->getInt('genre');
+        $typeId = $request->query->getInt('type');
+       
+        if ($genreId != null && $typeId == null) {
+            $animes = $animeRepo->findBy(['genre' => $genreId]);
+        }
+        if ($genreId == null && $typeId != null) {
+            $animes = $animeRepo->findBy(['type' => $typeId]);
+        }
+        if ($genreId != null && $typeId != null) {
+            $animes = $animeRepo->findBy(['genre' => $genreId, 'type' => $typeId]);
+        }
+        if ($genreId == null && $typeId == null) {
+            $animes = $animeRepo->findAll();
+        }
+
         forEach($animes as $anime) {
             $anime->setSynopsis(substr($anime->getSynopsis(), 0, 200) . '...');
         }
         return $this->render('home/index.html.twig', [
             'animes' => $animes,
+            'genres' => $genres,
+            'types' => $types,
+            'selectedGenre' => $genreId,
+            'selectedTheme' => $typeId,
+        ]);
+    }
+
+    /**
+    * @Route("/detail/{id}", name="app_detail")
+    */
+    public function show(int $id, AnimeRepository $animeRepo): Response
+    {
+        $anime = $animeRepo->find($id);
+
+        if (!$anime) {
+            throw $this->createNotFoundException('Anime non trouvé');
+        }
+        return $this->render('detail/index.html.twig', [
+            'anime' => $anime,
         ]);
     }
 }

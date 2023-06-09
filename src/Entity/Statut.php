@@ -3,87 +3,88 @@
 namespace App\Entity;
 
 use App\Repository\StatutRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StatutRepository::class)]
 class Statut
 {
+
+    #[ORM\Column]
+    private ?bool $isFavoris = null;
+
+    #[ORM\ManyToOne(inversedBy: 'statuts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?StatutType $statutType = null;
+
     #[ORM\Id]
-    #[ORM\GeneratedValue]
+    #[ORM\ManyToOne(inversedBy: 'statuts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    #[ORM\Id]
+    #[ORM\ManyToOne(inversedBy: 'statuts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Anime $anime = null;
+
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $episodes_vus = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $libelle = null;
-
-    #[ORM\Column]
-    private ?int $estFavoris = null;
-
-    #[ORM\OneToMany(mappedBy: 'statut', targetEntity: Anime::class)]
-    private Collection $animes;
-
-    public function __construct()
+    public function isIsFavoris(): ?bool
     {
-        $this->animes = new ArrayCollection();
+        return $this->isFavoris;
     }
 
-    public function getId(): ?int
+    public function setIsFavoris(bool $isFavoris): self
     {
-        return $this->id;
-    }
-
-    public function getLibelle(): ?string
-    {
-        return $this->libelle;
-    }
-
-    public function setLibelle(string $libelle): self
-    {
-        $this->libelle = $libelle;
+        $this->isFavoris = $isFavoris;
 
         return $this;
     }
 
-    public function getEstFavoris(): ?int
+    public function getStatutType(): ?StatutType
     {
-        return $this->estFavoris;
+        return $this->statutType;
     }
 
-    public function setEstFavoris(int $estFavoris): self
+    public function setStatutType(?StatutType $statutType): self
     {
-        $this->estFavoris = $estFavoris;
+        $this->statutType = $statutType;
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Anime>
-     */
-    public function getAnimes(): Collection
+    public function getUser(): ?User
     {
-        return $this->animes;
+        return $this->user;
     }
 
-    public function addAnime(Anime $anime): self
+    public function setUser(?User $user): self
     {
-        if (!$this->animes->contains($anime)) {
-            $this->animes->add($anime);
-            $anime->setStatut($this);
-        }
+        $this->user = $user;
 
         return $this;
     }
 
-    public function removeAnime(Anime $anime): self
+    public function getAnime(): ?Anime
     {
-        if ($this->animes->removeElement($anime)) {
-            // set the owning side to null (unless already changed)
-            if ($anime->getStatut() === $this) {
-                $anime->setStatut(null);
-            }
-        }
+        return $this->anime;
+    }
+
+    public function setAnime(?Anime $anime): self
+    {
+        $this->anime = $anime;
+
+        return $this;
+    }
+
+    public function getEpisodesVus(): ?int
+    {
+        return $this->episodes_vus;
+    }
+
+    public function setEpisodesVus(int $episodes_vus): self
+    {
+        $this->episodes_vus = $episodes_vus;
 
         return $this;
     }
