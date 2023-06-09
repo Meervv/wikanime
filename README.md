@@ -44,5 +44,5 @@ Votre projet Symfony 5 est maintenant installé et en cours d'exécution sur vot
 
 **Backend:** Symfony 6
 
-**Frontend:** Twig & Bootstrap 5
+**Frontend:** Twig & Bootstrap 5 & CSS 3
 
