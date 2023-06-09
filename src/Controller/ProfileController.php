@@ -104,6 +104,12 @@ class ProfileController extends AbstractController
             throw $this->createNotFoundException('Anime non trouvé');
         }
 
+        if (!$statut) {
+            $statut = new Statut();
+            $statut->setUser($user);
+            $statut->setAnime($anime);
+        }
+
         $form = $this->createForm(ModifStatutFormType::class, $statut);
         $form->handleRequest($request);
 
