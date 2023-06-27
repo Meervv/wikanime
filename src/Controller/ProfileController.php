@@ -28,8 +28,6 @@ class ProfileController extends AbstractController
         if ($this->IsGranted("ROLE_ADMIN")) {
             return $this->redirectToRoute('app_admin');
         }
-        // $repo = $doctrine->getManager()->getRepository(User::class);
-        // $listUsers = $repo->findBy(['totalEpisodesVus' => 'desc']);
         $listUsers = $userRepository->findBy([],['totalEpisodesVus' => 'desc']);
 
         $animes = $doctrine->getRepository(Anime::class)->findAll();
