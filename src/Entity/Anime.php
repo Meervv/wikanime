@@ -43,7 +43,7 @@ class Anime
     #[ORM\JoinColumn(nullable: false)]
     private ?Mangaka $mangaka = null;
 
-    #[ORM\OneToMany(mappedBy: 'anime_id', targetEntity: Statut::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'anime', targetEntity: Statut::class, orphanRemoval: true)]
     private Collection $statuts;
 
     #[ORM\OneToMany(mappedBy: 'anime', targetEntity: Avis::class, orphanRemoval: true)]

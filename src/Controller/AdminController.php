@@ -91,14 +91,15 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin/delete/{id}', name: 'app_admin_delete')]
-
-    public function delete(int $id, ManagerRegistry $doctrine, EntityManagerInterface $manager) : Response {
-        $anime = $doctrine->getRepository(Anime::class)->find($id);
-        if (!$anime) {
-            throw $this->createNotFoundException('L\'anime n\'existe pas');
-        }
-        $manager->remove($anime);
-        $manager->flush();
-        return $this->redirectToRoute('app_admin');
+public function delete(int $id, ManagerRegistry $doctrine, EntityManagerInterface $manager) : Response {
+    $anime = $doctrine->getRepository(Anime::class)->find($id);
+    if (!$anime) {
+        throw $this->createNotFoundException('L\'anime n\'existe pas');
     }
+    // dd($anime);
+    $manager->remove($anime);
+    $manager->flush();
+    return $this->redirectToRoute('app_admin');
+}
+
 }
